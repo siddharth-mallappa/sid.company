@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Siddharth Mallappa — Founding Marketeer, Designer, Technologist</title>
+<meta name="description" content="I help companies find repeat customers for their core technology. Positioning, brand and go-to-market for seven AI B2B products, from concept to first customer.">
+<meta property="og:title" content="Siddharth Mallappa">
+<meta property="og:description" content="I help companies find repeat customers for their core technology.">
+<meta property="og:url" content="https://sid.company">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://sid.company/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #E9ECE6;
+    --ink: #13233A;
+    --muted: #55627A;
+    --rule: #C5CCC3;
+    --signal: #2648D8;
+    --measure: 36rem;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+    font-size: 1.125rem;
+    line-height: 1.55;
+    font-variation-settings: "opsz" 14;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+  a:hover { color: var(--signal); }
+  :focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 2px; }
+
+  .wrap { max-width: 72rem; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 4rem); }
+
+  header.top {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 1.75rem 0; font-size: 1rem;
+  }
+  header.top .name { font-weight: 650; white-space: nowrap; }
+  header.top nav a { margin-left: 1.5rem; text-decoration: none; color: var(--muted); }
+  header.top nav a:hover { color: var(--signal); }
+
+  /* Hero: the one bold thing */
+  .hero { padding: clamp(4rem, 12vw, 9rem) 0 clamp(3rem, 8vw, 6rem); }
+  .hero h1 {
+    font-size: clamp(2.6rem, 7.4vw, 6.4rem);
+    line-height: 0.98;
+    font-weight: 700;
+    font-variation-settings: "opsz" 96, "wdth" 78;
+    letter-spacing: -0.025em;
+    max-width: 14ch;
+  }
+  .hero .role {
+    margin-top: 2rem; font-size: 1.25rem; color: var(--muted);
+  }
+
+  .intro {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, var(--measure));
+    gap: 2rem; padding-bottom: clamp(4rem, 10vw, 7rem);
+  }
+  .intro p + p { margin-top: 1.1em; }
+  .intro .lead { font-size: 1.35rem; line-height: 1.45; }
+  .count {
+    font-variation-settings: "opsz" 96, "wdth" 75;
+    font-weight: 300; font-size: clamp(5rem, 14vw, 11rem); line-height: 0.8;
+    color: var(--signal);
+  }
+  .count small { display: block; font-size: 1rem; font-weight: 400; line-height: 1.4; color: var(--muted); margin-top: 1rem; max-width: 12rem; font-variation-settings: "opsz" 14; }
+
+  section.block { border-top: 1px solid var(--rule); padding: 3rem 0 4rem; }
+  section.block > h2 {
+    font-size: 1rem; font-weight: 600; color: var(--muted); margin-bottom: 1rem;
+  }
+
+  .role-row {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, var(--measure));
+    gap: 2rem; padding: 2rem 0;
+  }
+  .role-row + .role-row { border-top: 1px solid var(--rule); }
+  .role-row h3 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.05; font-weight: 650;
+    font-variation-settings: "opsz" 60, "wdth" 85; letter-spacing: -0.01em;
+  }
+  .role-row .meta { margin-top: 0.4rem; color: var(--muted); font-size: 1rem; }
+  .role-row .meta span { display: block; }
+
+  .beyond { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, var(--measure)); gap: 2rem; }
+  .beyond p + p { margin-top: 1.1em; }
+  .beyond .stat { font-weight: 650; color: var(--signal); }
+
+  footer {
+    border-top: 1px solid var(--rule); padding: 4rem 0 3rem;
+  }
+  footer .ask {
+    font-size: clamp(1.8rem, 4.5vw, 3.4rem); line-height: 1.05; font-weight: 650;
+    font-variation-settings: "opsz" 96, "wdth" 80; letter-spacing: -0.02em; max-width: 20ch;
+  }
+  footer .ask a { text-decoration-thickness: 2px; }
+  footer .links { margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; color: var(--muted); font-size: 1rem; }
+
+  @media (max-width: 760px) {
+    .intro, .role-row, .beyond { grid-template-columns: 1fr; gap: 1rem; }
+    .count { font-size: 5.5rem; }
+    header.top nav a { margin-left: 1rem; }
+    header.top nav a[href="#beyond"] { display: none; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero h1 { animation: rise 0.9s cubic-bezier(.2,.7,.2,1) both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(0.25em); font-variation-settings: "opsz" 96, "wdth" 100; } }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="name" href="/" style="text-decoration:none">Siddharth Mallappa</a>
+    <nav aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#beyond">Beyond work</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>I help companies find repeat customers for their core technology.</h1>
+      <p class="role">Founding Marketeer, Designer, Technologist</p>
+    </section>
+
+    <section class="intro" aria-label="About">
+      <div class="count" aria-hidden="true">7<small>AI B2B products taken from concept to first customer</small></div>
+      <div>
+        <p class="lead">I work with founders, engineers, product and sales to find what is truly unique about a company, read the market, and position the company where it can win. That becomes the marketing foundation: brand, positioning, messaging and narrative strategy.</p>
+        <p>From there I build what it takes to test the story and land the first customers — sales enablement and sales process, the website and SEO, events and social — and help the sales team qualify and convert prospects. I also set up internal and external comms, so the team and the market hear the same story.</p>
+        <p>I’ve done this for seven AI B2B products, from concept to first customer.</p>
+      </div>
+    </section>
+
+    <section class="block" id="work">
+      <h2>Work</h2>
+
+      <article class="role-row">
+        <div>
+          <h3>CogitX AI</h3>
+          <p class="meta"><span>Founding Member</span><span>2024 – present</span></p>
+        </div>
+        <p>I joined CogitX AI as a founding member and its first marketer, and I own marketing end to end: positioning, brand, the website and SEO, social, events, internal and external comms, sales enablement, and a share of the product design. As the product found its market I repositioned the company three times in a year, rewriting the narrative, the website and the sales material each time.</p>
+      </article>
+
+      <article class="role-row">
+        <div>
+          <h3>EasyDocument AI</h3>
+          <p class="meta"><span>Founding Marketeer</span></p>
+        </div>
+        <p>EasyDocument AI had strong technology and a complicated offering. I restructured it into one brand and three clear products — AI Contracts, AI FinOps and AI EXIM — and chose EasyContracts as the wedge: the simplest product for a buyer to say yes to, and the one that opens the account for the rest. I led the market research, positioning, pricing and packaging, and produced the pitch decks and product videos used in the first sales conversations.</p>
+      </article>
+
+      <article class="role-row">
+        <div>
+          <h3>Freelance</h3>
+          <p class="meta"><span>Positioning and launches</span></p>
+        </div>
+        <p>Alongside these roles I have consulted for seven early-stage companies — Glaze EV, Batao AI, GMI, Datazips, Unifye, Asymmetry and August Innovate — on positioning, storytelling, market research and product launches. For GMI and Batao AI that meant segmentation, pricing and go-to-market strategy. For Glaze EV, messaging and visual identity. For Datazips, the full launch: website, product video, PR and sales enablement.</p>
+      </article>
+
+      <article class="role-row">
+        <div>
+          <h3>House of Web3</h3>
+          <p class="meta"><span>Founding Designer</span><span>2023 – 2024</span></p>
+        </div>
+        <p>House of Web3 is a gamified app for learning crypto. As the first designer I owned both the brand and the product. I ran the customer research, designed the gamification that kept learners progressing, and kept founders and engineers aligned on one version of the product from the first sketches to the shipped app.</p>
+      </article>
+
+      <article class="role-row">
+        <div>
+          <h3>Townsquare</h3>
+          <p class="meta"><span>Co-founder</span><span>2022 – 2023</span></p>
+        </div>
+        <p>At Townsquare I designed the product and led customer development: talking to users, cold emailing to win the first ones, and refining the offer and the pitch until they got replies. It taught me to spot a tarpit idea early, which I have used on every product since.</p>
+      </article>
+    </section>
+
+    <section class="block" id="beyond">
+      <h2>Beyond work</h2>
+      <div class="beyond">
+        <div></div>
+        <div>
+          <p>I like Type 2 fun. I exercise most days, trek often, and have done two long road trips, one through Japan and one through Scotland. I have finished one Hyrox and runs of 5, 10 and 21K. A triathlon is next on the list.</p>
+          <p>I also run a YouTube channel of nursery rhymes made entirely with AI. It is at <span class="stat">74K subscribers</span>. I built the whole production pipeline — characters, story and screenplay, voices, music and video — and one video reaching 100K views set the format the channel now runs on.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <p class="ask">Building something with strong technology and an unclear story? <a href="mailto:siddharth07sid@gmail.com">Email me.</a></p>
+    <div class="links">
+      <a href="mailto:siddharth07sid@gmail.com">siddharth07sid@gmail.com</a>
+    </div>
+  </footer>
+</div>
+</body>
+</html>
