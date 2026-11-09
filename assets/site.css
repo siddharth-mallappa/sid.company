@@ -1,0 +1,147 @@
+/* sid.company — shared styles
+   Fonts: Mulish (body), Archivo (headlines), stencil for name and roles.
+   To use Wasted Years once licensed: add /fonts/wasted-years.woff2 and uncomment the @font-face below. */
+/*
+@font-face { font-family: "Wasted Years"; src: url("/fonts/wasted-years.woff2") format("woff2"); font-display: swap; }
+*/
+:root {
+  --paper: #E9ECE6;
+  --paper-2: #E1E5DE;
+  --ink: #13233A;
+  --muted: #5A6679;
+  --rule: #C3CAC1;
+  --signal: #2648D8;
+  --stencil: "Wasted Years", "Big Shoulders Stencil", "Big Shoulders Stencil Display", Impact, sans-serif;
+  --display: "Archivo", "Arial Narrow", system-ui, sans-serif;
+  --body: "Mulish", system-ui, sans-serif;
+  --col: 46rem;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--paper); color: var(--ink);
+  font-family: var(--body); font-size: 1.0625rem; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+a:hover { color: var(--signal); }
+:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 2px; }
+
+.wrap { max-width: calc(var(--col) + 2 * clamp(1.25rem, 5vw, 3rem)); margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 3rem); }
+.wide { max-width: 68rem; }
+
+/* ---------- Masthead ---------- */
+.mast { padding: clamp(3.5rem, 10vw, 7rem) 0 2.5rem; }
+.mast .name {
+  font-family: var(--stencil); font-weight: 800; text-transform: uppercase;
+  font-size: clamp(3rem, 11vw, 6.2rem); line-height: 0.86; letter-spacing: 0.005em;
+}
+.mast .roles {
+  margin-top: 1rem; font-family: var(--stencil); font-weight: 600; text-transform: uppercase;
+  font-size: clamp(1.15rem, 3vw, 1.6rem); line-height: 1.1; letter-spacing: 0.04em; color: var(--signal);
+}
+.mast .roles span { white-space: nowrap; }
+.mast .roles span + span::before { content: "/"; margin-right: 0.45em; color: var(--rule); }
+.mast .line {
+  margin-top: 2.75rem; font-family: var(--display); font-weight: 750; font-variation-settings: "wdth" 82;
+  font-size: clamp(1.6rem, 4vw, 2.3rem); line-height: 1.08; letter-spacing: -0.01em; max-width: 20ch;
+}
+.intro { padding-bottom: 3.5rem; }
+.intro p { max-width: 38rem; }
+.intro p + p { margin-top: 1em; }
+.intro .count { color: var(--signal); font-weight: 700; }
+
+/* ---------- Section heads (manual-style) ---------- */
+.sec { border-top: 1px solid var(--ink); padding-top: 0.7rem; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.sec h2 { font-family: var(--display); font-size: 1rem; font-weight: 700; }
+.sec .aside { font-size: 0.9rem; color: var(--muted); }
+
+/* ---------- Work index ---------- */
+.index { list-style: none; margin: 1.5rem 0 4.5rem; }
+.index > li + li { border-top: 1px solid var(--rule); }
+.entry { display: block; padding: 2rem 0 2.25rem; text-decoration: none; }
+.entry .head { display: flex; align-items: center; gap: 0.75rem; }
+.entry .head img { width: 30px; height: 30px; border-radius: 7px; flex: none; object-fit: cover; }
+.entry h3 { font-family: var(--display); font-weight: 750; font-variation-settings: "wdth" 85; font-size: 1.3rem; line-height: 1.15; }
+.entry h3 .role::before { content: "· "; }
+.entry h3 .role { font-family: var(--body); font-weight: 500; font-size: 1rem; color: var(--muted); }
+.entry .years { margin-left: auto; font-size: 0.9rem; color: var(--muted); white-space: nowrap; }
+.entry p { margin-top: 0.6rem; max-width: 38rem; color: var(--ink); }
+.entry .cover { margin-top: 1.25rem; }
+.entry .cover .frame { aspect-ratio: 2 / 1; }
+.entry .more { display: inline-block; margin-top: 0.9rem; font-size: 0.95rem; text-decoration: underline; text-underline-offset: 0.2em; color: var(--muted); }
+.entry:hover .more, .entry:hover h3 { color: var(--signal); }
+.entry:hover .cover .frame { border-color: var(--signal); }
+
+/* ---------- Covers & figures ---------- */
+.frame {
+  position: relative; aspect-ratio: 16 / 9; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden;
+  display: grid; place-items: center; transition: border-color .2s ease;
+}
+.frame > img.fill { width: 100%; height: 100%; object-fit: cover; }
+.frame .mark { width: 22%; max-width: 120px; border-radius: 18%; box-shadow: 0 1px 0 rgba(0,0,0,.08); }
+.frame .logos { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; padding: 1.5rem; }
+.frame .logos img { width: clamp(44px, 9vw, 72px); height: auto; aspect-ratio: 1; border-radius: 14px; background: #fff; border: 1px solid var(--rule); }
+.figcap { margin-top: 0.55rem; font-size: 0.85rem; color: var(--muted); display: flex; gap: 0.6rem; }
+.figcap b { font-weight: 700; color: var(--ink); }
+
+/* ---------- Beyond / contact ---------- */
+.prose p { max-width: 38rem; }
+.prose p + p { margin-top: 1em; }
+.block { margin: 1.25rem 0 4.5rem; }
+.stat { color: var(--signal); font-weight: 700; }
+footer.foot { border-top: 1px solid var(--ink); padding: 0.7rem 0 3.5rem; font-size: 0.95rem; }
+footer.foot .links { display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; justify-content: space-between; color: var(--muted); }
+footer.foot .ask { font-family: var(--display); font-weight: 750; font-variation-settings: "wdth" 82; font-size: clamp(1.5rem, 4vw, 2.1rem); line-height: 1.1; margin: 1.5rem 0 2rem; max-width: 22ch; }
+
+/* ---------- Project page ---------- */
+.topbar { display: flex; justify-content: space-between; align-items: baseline; padding: 1.5rem 0; font-size: 0.95rem; }
+.topbar a { text-decoration: none; color: var(--muted); }
+.topbar a:hover { color: var(--signal); }
+.topbar .who { font-family: var(--stencil); font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--ink); font-size: 1.1rem; }
+.hero-media { margin: 1rem 0 0; }
+.hero-media .frame { border-radius: 6px; }
+.hero-media iframe { width: 100%; height: 100%; border: 0; display: block; }
+.title { padding: 2.75rem 0 2rem; }
+.title .head { display: flex; align-items: center; gap: 0.9rem; }
+.title .head img { width: 44px; height: 44px; border-radius: 10px; flex: none; object-fit: cover; }
+.title h1 { font-family: var(--display); font-weight: 800; font-variation-settings: "wdth" 80; font-size: clamp(2.2rem, 6vw, 3.4rem); line-height: 1; letter-spacing: -0.015em; }
+.title .meta { margin-top: 0.9rem; font-family: var(--stencil); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; font-size: 1.15rem; color: var(--signal); }
+.title .meta span + span::before { content: "/"; margin: 0 0.45em; color: var(--rule); }
+.part { display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: 1.5rem; border-top: 1px solid var(--rule); padding: 1.6rem 0 1.9rem; }
+.part h2 { font-family: var(--display); font-size: 1rem; font-weight: 700; padding-top: 0.15rem; }
+.part p + p, .part p + ul, .part ul + p { margin-top: 0.9em; }
+.part ul { list-style: none; }
+.part li { padding-left: 1rem; position: relative; }
+.part li + li { margin-top: 0.4rem; }
+.part li::before { content: ""; position: absolute; left: 0; top: 0.72em; width: 5px; height: 1px; background: var(--ink); }
+.credits li { padding-left: 0; }
+.credits li::before { display: none; }
+.credits .r { color: var(--muted); }
+.clientlist li { padding-left: 0; display: grid; grid-template-columns: 28px 1fr; gap: 0.75rem; align-items: start; }
+.clientlist li::before { display: none; }
+.clientlist img { width: 28px; height: 28px; border-radius: 7px; border: 1px solid var(--rule); margin-top: 0.15rem; }
+.clientlist .ph { width: 28px; height: 28px; border-radius: 7px; border: 1px dashed var(--rule); margin-top: 0.15rem; }
+.nextprev { display: flex; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--ink); padding: 0.8rem 0 4rem; font-size: 0.95rem; }
+.nextprev a { text-decoration: none; }
+.nextprev a span { display: block; color: var(--muted); font-size: 0.85rem; }
+.nextprev a b { font-family: var(--display); font-weight: 750; font-size: 1.15rem; }
+.nextprev a:hover b { color: var(--signal); }
+
+@media (max-width: 640px) {
+  .part { grid-template-columns: 1fr; gap: 0.5rem; }
+  .entry .head { align-items: flex-start; }
+  .entry .head img { margin-top: 0.1rem; }
+  .entry h3 .role { display: block; }
+  .entry h3 .role::before { content: none; }
+  .entry .years { display: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .mast .name, .mast .roles, .mast .line { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+  .mast .roles { animation-delay: .08s; } .mast .line { animation-delay: .16s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(0.3em); } }
+}
+.hero-media .frame { aspect-ratio: 21 / 9; }
+.hero-media .frame.deck { aspect-ratio: 16 / 9; }
+@media (max-width: 640px) { .hero-media .frame { aspect-ratio: 16 / 9; } }
