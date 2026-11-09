@@ -236,7 +236,9 @@
   function draw(t) {
     var p = (t % PERIOD) / PULSE;              // 0..1 during the pulse, >1 while resting
     x.clearRect(0, 0, 64, 64);
-    rr(14); x.fillStyle = BLUE; x.fill();
+    var g = x.createLinearGradient(0, 0, 64, 64);   // diagonal gradient tile
+    g.addColorStop(0, '#5B7CFF'); g.addColorStop(0.55, BLUE); g.addColorStop(1, '#1A2F9E');
+    rr(14); x.fillStyle = g; x.fill();
     if (p < 1) {                                // ring grows from the letter to the edge and fades
       var e = 1 - Math.pow(1 - p, 3);
       x.beginPath(); x.arc(32, 32, 18 + e * 16, 0, Math.PI * 2);
