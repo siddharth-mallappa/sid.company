@@ -14,14 +14,14 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Rock+Salt&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&family=Rock+Salt&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
 <div class="wrap">
 <header class="top">
   <div class="who"><a href="/">Siddharth Mallappa</a><br><span class="muted">Founding Marketeer, Designer, Technologist</span></div>
-  <nav aria-label="Contact"><a class="ico" href="mailto:siddharth07sid@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect width="24" height="24" rx="5" fill="currentColor"/><path class="g" d="M6 7.5h12a1 1 0 0 1 1 1v.4l-7 4.6-7-4.6v-.4a1 1 0 0 1 1-1zM5 10.6l7 4.6 7-4.6v5.9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1z"/></svg></a><a class="ico" href="https://www.linkedin.com/in/siddharth-mallappa-81184614b/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect width="24" height="24" rx="5" fill="currentColor"/><g class="g" transform="translate(4.6 4.4) scale(.62)"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></g></svg></a><a class="ico" href="https://x.com/Siddhhartth__" target="_blank" rel="noopener" aria-label="X (Twitter)"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect width="24" height="24" rx="5" fill="currentColor"/><g class="g" transform="translate(5.3 5.3) scale(.56)"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></g></svg></a><button class="theme ico" type="button" aria-label="Switch to dark theme"><svg class="moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect width="24" height="24" rx="5" fill="currentColor"/><path class="g" d="M13.6 6.2a6 6 0 1 0 4.2 9.9 5 5 0 0 1-4.2-9.9z"/></svg><svg class="sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect width="24" height="24" rx="5" fill="currentColor"/><g class="g"><circle cx="12" cy="12" r="3.4"/><path d="M11.2 4.5h1.6v2.2h-1.6zM11.2 17.3h1.6v2.2h-1.6zM4.5 11.2h2.2v1.6H4.5zM17.3 11.2h2.2v1.6h-2.2zM6.6 7.7l1.1-1.1 1.6 1.6-1.1 1.1zM14.7 15.8l1.1-1.1 1.6 1.6-1.1 1.1zM6.6 16.3l1.6-1.6 1.1 1.1-1.6 1.6zM14.7 8.2l1.6-1.6 1.1 1.1-1.6 1.6z"/></g></svg></button></nav>
+  <nav aria-label="Contact"><a href="mailto:siddharth07sid@gmail.com">Email</a><a href="https://www.linkedin.com/in/siddharth-mallappa-81184614b/" target="_blank" rel="noopener">LinkedIn</a><a href="https://x.com/Siddhhartth__" target="_blank" rel="noopener">Twitter</a><button class="theme" type="button" aria-label="Switch to dark theme">Dark</button></nav>
 </header>
 <main class="case">
 <a class="back" href="/#work">← All work</a>
@@ -39,7 +39,7 @@
 <script>
 (function(){var b=document.querySelector('.theme'),r=document.documentElement;
 function cur(){return r.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}
-function label(){var n=cur()==='dark'?'light':'dark';b.dataset.next=n;b.setAttribute('aria-label','Switch to '+n+' theme')}
+function label(){var n=cur()==='dark'?'light':'dark';b.textContent=n==='dark'?'Dark':'Light';b.setAttribute('aria-label','Switch to '+n+' theme')}
 b.addEventListener('click',function(){var n=cur()==='dark'?'light':'dark';r.dataset.theme=n;try{localStorage.setItem('theme',n)}catch(e){}label()});label();})();
 </script>
 <script src="/assets/favicon.js" defer></script>
