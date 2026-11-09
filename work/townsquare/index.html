@@ -9,24 +9,39 @@
 <meta property="og:description" content="An app for discovering the people, communities and events in your city, introduced through friends. I co-founded it and led product and customer development.">
 <meta property="og:url" content="https://sid.company/work/townsquare/">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://sid.company/townsquare/og-cover.jpg">
 <link rel="canonical" href="https://sid.company/work/townsquare/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=Big+Shoulders+Stencil:wght@500..900&family=Mulish:ital,wght@0,300..800;1,400&display=swap" rel="stylesheet">
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Rock+Salt&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
-<div class="wrap wide">
-<header class="topbar"><a class="who" href="/">Siddharth Mallappa</a><a href="/#work">All work</a></header>
-<div class="hero-media"><div class="frame deck" style="background:#000"><iframe src="/townsquare/" title="Townsquare pitch deck" loading="lazy" allowfullscreen></iframe></div><p class="figcap"><b>Fig. 1</b> Townsquare pitch deck. Use the arrow keys or swipe. <a href="/townsquare/">Open full screen</a></p></div>
-</div>
-<main class="wrap">
-<section class="title"><div class="head"><img src="/logos/townsquare.webp" alt="" aria-hidden="true"><h1>Townsquare</h1></div><p class="meta"><span>Co-founder</span><span>2022 – 2023</span></p></section>
-<section class="part"><h2>Overview</h2><div><p>Local communities are scattered across WhatsApp groups, Facebook groups, Discord servers and Instagram pages. People can’t find them, and they can’t reach the people nearby.</p><p>Townsquare put communities at the centre: one place for the people, communities and events in your city, sorted by distance and introduced through friends.</p></div></section>
-<section class="part"><h2>My role</h2><div><p>Co-founder and COO. I designed the product and led customer development:</p><ul><li>Talking to users</li><li>Cold emailing to win the first ones</li><li>Refining the offer and the pitch until they got replies</li></ul></div></section>
-<section class="part"><h2>Takeaways</h2><div><p>It taught me to spot a tarpit idea early, which I have used on every product since.</p></div></section>
-<section class="part"><h2>Credits</h2><div><ul class="credits"><li>Sudarshan Senthil Kumar <span class="r">Co-founder, CEO</span></li><li>Siddharth Mallappa <span class="r">Co-founder, COO</span></li></ul></div></section>
-<nav class="nextprev" aria-label="More work"><a href="/work/house-of-web3/"><span>Previous</span><b>House of Web3</b></a><a href="/work/cogitx/" style="text-align:right"><span>Next</span><b>CogitX AI</b></a></nav>
+<div class="wrap">
+<header class="top">
+  <div class="who"><a href="/">Siddharth Mallappa</a><br><span class="muted">Founding Marketeer, Designer, Technologist</span></div>
+  <nav aria-label="Contact"><a href="mailto:siddharth07sid@gmail.com">Email</a><button class="theme" type="button" aria-label="Switch colour theme">Dark</button></nav>
+</header>
+<main class="case">
+<a class="back" href="/#work">← All work</a>
+<h1 class="case-title"><img src="/logos/townsquare.webp" alt="" aria-hidden="true"><span>Townsquare</span></h1>
+<p class="case-meta">Co-founder · 2022 – 2023</p>
+<div class="media"><div class="frame deck"><iframe src="/townsquare/" title="Townsquare pitch deck" loading="lazy" allowfullscreen></iframe></div><p class="note">Pitch deck. Use the arrow keys or swipe. <a class="u" href="/townsquare/">Open full screen</a></p></div>
+<section class="sec"><h2 class="label">overview</h2><p>Local communities are scattered across WhatsApp groups, Facebook groups, Discord servers and Instagram pages. People can’t find them, and they can’t reach the people nearby.</p><p>Townsquare put communities at the centre: one place for the people, communities and events in your city, sorted by distance and introduced through friends.</p></section>
+<section class="sec"><h2 class="label">my role</h2><p>Co-founder and COO. I designed the product and led customer development:</p><ul><li>Talking to users</li><li>Cold emailing to win the first ones</li><li>Refining the offer and the pitch until they got replies</li></ul></section>
+<section class="sec"><h2 class="label">takeaways</h2><p>It taught me to spot a tarpit idea early, which I have used on every product since.</p></section>
+<section class="sec"><h2 class="label">credits</h2><ul class="credits"><li><span>Sudarshan Senthil Kumar</span><span>Co-founder, CEO</span></li><li><span>Siddharth Mallappa</span><span>Co-founder, COO</span></li></ul></section>
+<nav class="nextprev" aria-label="More work"><a href="/work/house-of-web3/"><span>Previous</span><br>House of Web3</a><a href="/work/cogitx/" style="text-align:right"><span>Next</span><br>CogitX AI</a></nav>
 </main>
+<footer class="foot"><span>© 2026 Siddharth Mallappa</span><a href="mailto:siddharth07sid@gmail.com">siddharth07sid@gmail.com</a></footer>
+</div>
+<script>
+(function(){var b=document.querySelector('.theme'),r=document.documentElement;
+function cur(){return r.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}
+function label(){b.textContent=cur()==='dark'?'Light':'Dark'}
+b.addEventListener('click',function(){var n=cur()==='dark'?'light':'dark';r.dataset.theme=n;try{localStorage.setItem('theme',n)}catch(e){}label()});label();})();
+</script>
 <script src="/assets/favicon.js" defer></script>
 </body>
 </html>
