@@ -224,34 +224,33 @@
   </footer>
 </div>
 <script>
-/* Animated favicon: the "S" tile with a ring that pulses outward every few seconds.
+/* Animated favicon: a gradient tile with waves flowing across it.
    Browsers don't animate SVG/GIF favicons, so frames are drawn on a canvas. */
 (function () {
   if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var link = document.querySelector('link[rel="icon"]');
   var c = document.createElement('canvas'); c.width = c.height = 64;
   var x = c.getContext('2d'); if (!link || !x) return;
-  var BLUE = '#2648D8', PAPER = '#E9ECE6', PERIOD = 3000, PULSE = 1200, last = '';
   function rr(r) { x.beginPath(); x.moveTo(r,0); x.arcTo(64,0,64,64,r); x.arcTo(64,64,0,64,r); x.arcTo(0,64,0,0,r); x.arcTo(0,0,64,0,r); x.closePath(); }
+  function wave(t, base, amp, len, speed, fill) {
+    x.beginPath(); x.moveTo(0, 64);
+    for (var i = 0; i <= 64; i += 2) x.lineTo(i, base + amp * Math.sin((i / len) * Math.PI * 2 + t * speed));
+    x.lineTo(64, 64); x.closePath(); x.fillStyle = fill; x.fill();
+  }
   function draw(t) {
-    var p = (t % PERIOD) / PULSE;              // 0..1 during the pulse, >1 while resting
+    var s = t / 1000, h = 228 + 18 * Math.sin(s * 0.8);          // hue drifts between blue and violet
     x.clearRect(0, 0, 64, 64);
-    var g = x.createLinearGradient(0, 0, 64, 64);   // diagonal gradient tile
-    g.addColorStop(0, '#5B7CFF'); g.addColorStop(0.55, BLUE); g.addColorStop(1, '#1A2F9E');
-    rr(14); x.fillStyle = g; x.fill();
-    if (p < 1) {                                // ring grows from the letter to the edge and fades
-      var e = 1 - Math.pow(1 - p, 3);
-      x.beginPath(); x.arc(32, 32, 18 + e * 16, 0, Math.PI * 2);
-      x.strokeStyle = 'rgba(233,236,230,' + (0.9 * (1 - p)).toFixed(2) + ')';
-      x.lineWidth = 4 - 3 * p; x.stroke();
-    }
-    var s = p < 1 ? 1 + 0.08 * Math.sin(p * Math.PI) : 1;   // the S breathes slightly with the ring
-    x.save(); x.translate(32, 33); x.scale(s, s);
-    x.fillStyle = PAPER; x.font = '700 38px Arial, sans-serif';
-    x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText('S', 0, 1);
+    x.save(); rr(14); x.clip();
+    var g = x.createLinearGradient(0, 0, 64, 64);
+    g.addColorStop(0, 'hsl(' + (h + 10) + ',100%,68%)');
+    g.addColorStop(0.55, 'hsl(' + h + ',72%,50%)');
+    g.addColorStop(1, 'hsl(' + (h - 6) + ',72%,26%)');
+    x.fillStyle = g; x.fillRect(0, 0, 64, 64);
+    wave(s, 30, 6, 48, 2.2, 'rgba(255,255,255,0.18)');
+    wave(s, 38, 5, 40, -2.8, 'rgba(120,230,255,0.28)');
+    wave(s, 46, 4, 56, 1.6, 'rgba(10,20,90,0.35)');
     x.restore();
-    var url = c.toDataURL('image/png');
-    if (url !== last) { link.type = 'image/png'; link.href = url; last = url; }
+    link.type = 'image/png'; link.href = c.toDataURL('image/png');
   }
   setInterval(function () { draw(performance.now()); }, 80);
 })();
