@@ -48,14 +48,18 @@ a:hover { color: var(--accent); }
 .top { display: flex; justify-content: space-between; align-items: flex-end; gap: 1.5rem; padding: 3.25rem 0 0; }
 .top .who { line-height: 1.45; }
 .top .who a:hover { color: inherit; }
-.top nav { display: flex; gap: 1.25rem; align-items: center; }
-.top nav a::after { content: " ↗"; color: var(--muted); }
-.top nav a.ico::after { content: none; }
+.top nav { display: flex; gap: 0.9rem; align-items: center; }
 .top nav a.ico { display: inline-flex; color: var(--fg); }
 .top nav a.ico:hover { color: var(--accent); }
 .top nav a.ico svg { display: block; }
-.theme { font: inherit; color: var(--muted); background: none; border: 0; cursor: pointer; padding: 0; }
-.theme:hover { color: var(--fg); }
+.top nav a.ico .g, .top nav a.ico .g path { fill: var(--bg); }
+.theme { font: inherit; color: var(--fg); background: none; border: 0; cursor: pointer; padding: 0; display: inline-flex; }
+.theme:hover { color: var(--accent); }
+.theme svg { display: block; }
+.theme .g, .theme .g * { fill: var(--bg); }
+.theme .sun { display: none; }
+.theme[data-next="light"] .sun { display: block; }
+.theme[data-next="light"] .moon { display: none; }
 
 /* ---------- Sections ---------- */
 .lede { margin-top: 7rem; color: var(--muted); max-width: 40rem; }
