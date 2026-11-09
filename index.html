@@ -102,6 +102,11 @@
   .thumb:hover span { color: var(--signal); }
   @media (prefers-reduced-motion: reduce) { .thumb img { transition: none; } .thumb:hover img { transform: none; } }
 
+  .co { display: flex; align-items: center; gap: 0.75rem; }
+  .co img { width: 32px; height: 32px; border-radius: 8px; flex: none; object-fit: cover; }
+  .clients { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.9rem; }
+  .clients img { display: block; width: 28px; height: 28px; border-radius: 7px; object-fit: cover; border: 1px solid var(--rule); }
+
   .beyond { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, var(--measure)); gap: 2rem; }
   .beyond p + p { margin-top: 1.1em; }
   .beyond .stat { font-weight: 650; color: var(--signal); }
@@ -159,7 +164,7 @@
 
       <article class="role-row">
         <div>
-          <h3>CogitX AI</h3>
+          <div class="co"><img src="/logos/cogitx.svg" width="32" height="32" alt="" aria-hidden="true"><h3>CogitX AI</h3></div>
           <p class="meta"><span>Founding Member</span><span>2024 – present</span></p>
         </div>
         <p>I joined CogitX AI as a founding member and its first marketer, and I own marketing end to end: positioning, brand, the website and SEO, social, events, internal and external comms, sales enablement, and a share of the product design. As the product found its market I repositioned the company three times in a year, rewriting the narrative, the website and the sales material each time.</p>
@@ -167,7 +172,7 @@
 
       <article class="role-row">
         <div>
-          <h3>EasyDocument AI</h3>
+          <div class="co"><img src="/logos/easydocument.svg" width="32" height="32" alt="" aria-hidden="true"><h3>EasyDocument AI</h3></div>
           <p class="meta"><span>Founding Marketeer</span></p>
         </div>
         <p>EasyDocument AI had strong technology and a complicated offering. I restructured it into one brand and three clear products — AI Contracts, AI FinOps and AI EXIM — and chose EasyContracts as the wedge: the simplest product for a buyer to say yes to, and the one that opens the account for the rest. I led the market research, positioning, pricing and packaging, and produced the pitch decks and product videos used in the first sales conversations.</p>
@@ -177,13 +182,19 @@
         <div>
           <h3>Freelance</h3>
           <p class="meta"><span>Positioning and launches</span></p>
+          <ul class="clients" aria-label="Selected clients">
+            <li><img src="/logos/gmi.webp" width="28" height="28" alt="Great Manager Institute" title="Great Manager Institute"></li>
+            <li><img src="/logos/datazips.webp" width="28" height="28" alt="Datazips" title="Datazips"></li>
+            <li><img src="/logos/unifye.webp" width="28" height="28" alt="Unifye" title="Unifye"></li>
+            <li><img src="/logos/august.webp" width="28" height="28" alt="August Innovate" title="August Innovate"></li>
+          </ul>
         </div>
         <p>Alongside these roles I have consulted for seven early-stage companies — Glaze EV, Batao AI, GMI, Datazips, Unifye, Asymmetry and August Innovate — on positioning, storytelling, market research and product launches. For GMI and Batao AI that meant segmentation, pricing and go-to-market strategy. For Glaze EV, messaging and visual identity. For Datazips, the full launch: website, product video, PR and sales enablement.</p>
       </article>
 
       <article class="role-row">
         <div>
-          <h3>House of Web3</h3>
+          <div class="co"><img src="/logos/houseofweb3.webp" width="32" height="32" alt="" aria-hidden="true"><h3>House of Web3</h3></div>
           <p class="meta"><span>Founding Designer</span><span>2023 – 2024</span></p>
         </div>
         <p>House of Web3 is a gamified app for learning crypto. As the first designer I owned both the brand and the product. I ran the customer research, designed the gamification that kept learners progressing, and kept founders and engineers aligned on one version of the product from the first sketches to the shipped app.</p>
@@ -191,7 +202,7 @@
 
       <article class="role-row">
         <div>
-          <h3>Townsquare</h3>
+          <div class="co"><img src="/logos/townsquare.webp" width="32" height="32" alt="" aria-hidden="true"><h3>Townsquare</h3></div>
           <p class="meta"><span>Co-founder</span><span>2022 – 2023</span></p>
         </div>
         <div>
