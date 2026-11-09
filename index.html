@@ -92,6 +92,16 @@
   .role-row .meta { margin-top: 0.4rem; color: var(--muted); font-size: 1rem; }
   .role-row .meta span { display: block; }
 
+  .thumb { display: block; margin-top: 1.5rem; max-width: 26rem; text-decoration: none; }
+  .thumb img {
+    display: block; width: 100%; height: auto; border-radius: 6px;
+    border: 1px solid var(--rule); transition: transform .25s ease, border-color .25s ease;
+  }
+  .thumb span { display: block; margin-top: 0.6rem; font-size: 1rem; color: var(--muted); text-decoration: underline; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+  .thumb:hover img { border-color: var(--signal); transform: translateY(-2px); }
+  .thumb:hover span { color: var(--signal); }
+  @media (prefers-reduced-motion: reduce) { .thumb img { transition: none; } .thumb:hover img { transform: none; } }
+
   .beyond { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, var(--measure)); gap: 2rem; }
   .beyond p + p { margin-top: 1.1em; }
   .beyond .stat { font-weight: 650; color: var(--signal); }
@@ -184,7 +194,13 @@
           <h3>Townsquare</h3>
           <p class="meta"><span>Co-founder</span><span>2022 – 2023</span></p>
         </div>
-        <p>At Townsquare I designed the product and led customer development: talking to users, cold emailing to win the first ones, and refining the offer and the pitch until they got replies. It taught me to spot a tarpit idea early, which I have used on every product since. <a href="/townsquare/">See the pitch deck</a>.</p>
+        <div>
+          <p>At Townsquare I designed the product and led customer development: talking to users, cold emailing to win the first ones, and refining the offer and the pitch until they got replies. It taught me to spot a tarpit idea early, which I have used on every product since.</p>
+          <a class="thumb" href="/townsquare/">
+            <img src="/townsquare/og-cover.jpg" width="1200" height="630" alt="Cover of the Townsquare pitch deck" loading="lazy">
+            <span>Townsquare pitch deck</span>
+          </a>
+        </div>
       </article>
     </section>
 
