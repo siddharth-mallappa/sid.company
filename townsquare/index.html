@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Townsquare — Pitch deck</title>
+<meta name="description" content="Townsquare: a new way to discover your city. Pitch deck by Siddharth Mallappa, remastered.">
+<link rel="canonical" href="https://sid.company/townsquare/">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#0a0a0a">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Siddharth Mallappa">
+<meta property="og:title" content="Townsquare — Pitch deck">
+<meta property="og:description" content="A new way to discover your city. Pitch deck by Siddharth Mallappa.">
+<meta property="og:url" content="https://sid.company/townsquare/">
+<meta property="og:image" content="https://sid.company/townsquare/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Townsquare: a new way to discover your city">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Townsquare — Pitch deck">
+<meta name="twitter:description" content="A new way to discover your city. Pitch deck by Siddharth Mallappa.">
+<meta name="twitter:image" content="https://sid.company/townsquare/og-cover.jpg">
+<link rel="preload" href="assets/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/ts-wordmark.webp" as="image">
+<style>
+@font-face{font-family:"Inter";src:url(assets/inter.woff2) format("woff2");font-weight:100 900;font-display:swap}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#050505;color:#fff;font-family:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;height:auto;user-select:none;-webkit-user-drag:none}
+p{margin:0}
+
+/* viewer */
+#viewport{position:fixed;inset:0;touch-action:pan-y}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:0 0;overflow:hidden;background:#0a0a0a}
+.slide{position:absolute;inset:0;background:#0a0a0a;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility 0s linear .6s}
+.slide.on{opacity:1;visibility:visible;transition:opacity .6s ease,visibility 0s}
+.slide.out{visibility:visible}
+.abs{position:absolute}
+
+/* ---------- type system ---------- */
+:root{--ease:cubic-bezier(.22,1,.36,1);--yel:#FFE27A;--yel2:#F7B84B;--mute:#8f8f8f;--dim:#6b6b6b}
+.eyebrow{position:absolute;left:120px;top:92px;display:flex;align-items:center;gap:14px;font-size:20px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.eyebrow::before{content:"";width:14px;height:14px;background:#FFE873;border-radius:2px}
+.h1{font-size:56px;font-weight:700;line-height:1.08;letter-spacing:-.022em;color:#fff}
+.h2{font-size:32px;font-weight:700;line-height:1.15;letter-spacing:-.01em}
+.h3{font-size:26px;font-weight:700;line-height:1.2;letter-spacing:-.005em}
+.lead{font-size:26px;line-height:1.42;color:var(--mute)}
+.body{font-size:21px;line-height:1.45;color:var(--mute)}
+.small{font-size:17px;line-height:1.4;color:var(--dim)}
+.hl{background:linear-gradient(90deg,var(--yel),var(--yel2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.num{font-weight:700;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.card{position:absolute;background:#121212;border-radius:28px}
+.tile{background:#1a1a1a;border-radius:20px;display:grid;place-items:center}
+
+/* ---------- motion: one easing, small distances, gentle stagger ---------- */
+.a{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform 1s var(--ease),filter .9s ease;transition-delay:var(--d,0s)}
+.a.fade{transform:none}
+.a.scale{transform:scale(.94)}
+.a.lt{transform:translateX(-28px)}
+.a.rt{transform:translateX(28px)}
+.a.rise{transform:translateY(80px)}
+.a.soft{filter:blur(10px);transform:scale(1.02)}
+.slide.on .a,.slide.out .a{opacity:1;transform:none;filter:none}
+.slide.out .a{transition:none}
+.draw{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset var(--dur,1.2s) var(--ease) var(--d,0s)}
+.slide.on .draw,.slide.out .draw{stroke-dashoffset:0}
+.slide.out .draw{transition:none}
+
+/* chrome */
+#bar{position:fixed;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.08);z-index:5}
+#bar i{display:block;height:100%;width:0;background:#FFE873;transition:width .6s var(--ease)}
+#ctrl{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);display:flex;align-items:center;gap:6px;padding:6px;border-radius:999px;background:rgba(20,20,20,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08);z-index:6;transition:opacity .4s,transform .4s;font-size:14px}
+body.idle #ctrl{opacity:0;transform:translateX(-50%) translateY(10px);pointer-events:none}
+#ctrl button{all:unset;cursor:pointer;width:38px;height:38px;display:grid;place-items:center;border-radius:50%;color:#ddd}
+#ctrl button:hover{background:rgba(255,255,255,.1);color:#fff}
+#ctrl button:focus-visible{outline:2px solid #FFE873;outline-offset:1px}
+#ctrl svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#count{min-width:64px;text-align:center;color:#bbb;font-variant-numeric:tabular-nums}
+#hint{position:fixed;top:18px;left:50%;transform:translateX(-50%);font-size:13px;color:#888;background:rgba(20,20,20,.7);padding:8px 14px;border-radius:999px;z-index:6;transition:opacity .6s;pointer-events:none}
+#hint.gone{opacity:0}
+#rot{display:none;position:fixed;left:0;right:0;bottom:90px;text-align:center;font-size:13px;color:#777;z-index:4;pointer-events:none}
+@media (orientation:portrait) and (max-width:700px){#rot{display:block}}
+
+/* S1 */
+#s1{background:#000}
+#s1 .icon{animation:float 6s ease-in-out 2s infinite}
+@keyframes float{50%{transform:translateY(-8px)}}
+
+/* S2 marquee */
+.col{position:absolute;top:0;height:1080px;width:330px;overflow:hidden;-webkit-mask-image:linear-gradient(transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(transparent,#000 14%,#000 86%,transparent)}
+.col .track{display:flex;flex-direction:column;gap:18px;animation:scrollUp var(--sp,60s) linear infinite;animation-play-state:paused}
+.col.rev .track{animation-name:scrollDn}
+#s2.on .col .track,#s2.out .col .track{animation-play-state:running}
+.col img{width:100%;border-radius:14px}
+@keyframes scrollUp{to{transform:translateY(calc(-50% - 9px))}}
+@keyframes scrollDn{from{transform:translateY(calc(-50% - 9px))}to{transform:translateY(0)}}
+
+/* S3 */
+.ring{position:absolute;border-radius:50%}
+.pill{position:absolute;background:#fff;color:#000;font-weight:700;font-size:22px;border-radius:999px;padding:0 20px;height:44px;line-height:44px;white-space:nowrap;transform-origin:center}
+
+/* S4 graph */
+.chip{position:absolute;background:#2a2e1d;color:#e2e5c8;font-size:24px;border-radius:8px;padding:0 12px;height:46px;line-height:46px;white-space:nowrap}
+.person{position:absolute;display:flex;align-items:center;gap:6px;font-size:24px;color:#d9d9d9;background:#151515;border-radius:999px;padding:3px 14px 3px 4px;white-space:nowrap}
+.person img{width:24px;height:24px;border-radius:50%}
+.tag{position:absolute;font-size:17px;color:#5f5f5f;white-space:nowrap}
+.prin{display:flex;gap:22px;align-items:flex-start}
+.prin img{width:64px;flex:none}
+
+/* S9 badges */
+.badge{position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;background:#FFE873;color:#1a1400;font-weight:800;font-size:22px;display:grid;place-items:center;box-shadow:0 0 0 0 rgba(255,232,115,.5);animation:ping 2.4s ease-out infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(255,232,115,.45)}100%{box-shadow:0 0 0 22px rgba(255,232,115,0)}}
+.steps{display:flex;flex-direction:column;gap:34px}
+.step{display:flex;gap:22px;align-items:flex-start}
+.step b{flex:none;width:44px;height:44px;border-radius:50%;background:#FFE873;color:#1a1400;font-size:22px;font-weight:800;display:grid;place-items:center}
+
+/* S10 */
+.logo{position:absolute;width:112px;height:112px;margin:-56px 0 0 -56px;border-radius:50%;background:#121212;display:grid;place-items:center}
+.logo img{width:70px;height:70px;border-radius:50%}
+.halo{position:absolute;border-radius:50%;border:1.5px solid #3346e0;animation:halo 3s ease-out infinite;opacity:0}
+@keyframes halo{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.8);opacity:0}}
+
+/* S11 */
+.rip{position:absolute;border-radius:50%;transform:translate(-50%,-50%)}
+.wave{position:absolute;width:300px;height:300px;margin:-150px 0 0 -150px;border-radius:50%;border:2px solid rgba(255,255,255,.05);opacity:0}
+.slide.on .wave{animation:wave 7s ease-out infinite}
+@keyframes wave{0%{transform:scale(.6);opacity:0}15%{opacity:1}100%{transform:scale(3.6);opacity:0}}
+.stream{position:absolute;top:836px;height:184px;width:536px;background:#121212;border-radius:24px;padding:30px 34px}
+.stream h4{display:flex;align-items:center;gap:12px;font-size:28px;font-weight:700;letter-spacing:-.01em}
+.stream h4 img{width:40px}
+.stream p{font-size:19px;line-height:1.42;color:var(--mute);margin-top:12px}
+.dotlist{display:flex;flex-direction:column;gap:18px}
+.dotlist li{list-style:none;position:relative;padding-left:26px;font-size:21px;line-height:1.4;color:var(--mute)}
+.dotlist li::before{content:"";position:absolute;left:0;top:11px;width:8px;height:8px;border-radius:50%;background:#FFE873}
+
+/* S12 */
+.founder{position:absolute;top:340px;width:820px;height:330px;background:#121212;border-radius:28px;padding:44px 48px}
+.proof{position:absolute;top:710px;height:150px;border-radius:24px;background:#121212;padding:30px 32px;font-size:21px;line-height:1.4;color:var(--mute)}
+.proof b{display:block;color:#fff;font-size:24px;margin-bottom:6px}
+
+@media (prefers-reduced-motion:reduce){
+  .a{transform:none!important;filter:none!important;transition:opacity .3s!important}
+  .draw{transition:none!important;stroke-dashoffset:0!important}
+  .col .track,.wave,.halo,.badge,#s1 .icon{animation:none!important}
+}
+</style>
+</head>
+<body>
+<noscript><p style="padding:40px;font:18px/1.5 system-ui;color:#ccc">This deck needs JavaScript to play.</p></noscript>
+<div id="viewport"><div id="stage">
+
+<!-- 1 · Title -->
+<section class="slide" id="s1" aria-label="Townsquare: a new way to discover your city">
+  <img width="410" height="410" decoding="async" class="abs a scale icon" style="left:858px;top:524px;width:205px;--d:.8s" src="assets/ts-icon.webp" alt="">
+  <img width="611" height="408" decoding="async" class="abs a rise" style="left:463px;top:477px;width:995px;--d:.2s" src="assets/s1-couch.webp" alt="Friends hanging out on a couch">
+  <img width="900" height="1095" decoding="async" class="abs a rise" style="left:1389px;top:397px;width:562px;--d:.35s" src="assets/s1-hoop.webp" alt="Pickup basketball in the city">
+  <img width="612" height="408" decoding="async" class="abs a rise" style="left:-124px;top:575px;width:778px;--d:.05s" src="assets/s1-friends.webp" alt="Two friends fist-bumping">
+  <img width="1280" height="244" decoding="async" class="abs a soft" style="left:640px;top:270px;width:640px;--d:.1s" src="assets/ts-wordmark.webp" alt="Townsquare">
+  <h1 class="abs a" style="left:0;right:0;text-align:center;top:398px;font-size:40px;font-weight:600;color:#a7a7a7;letter-spacing:-.01em;--d:.45s">A new way to discover your city.</h1>
+</section>
+
+<!-- 2 · Background -->
+<section class="slide" id="s2" aria-label="Background">
+  <h2 class="abs h1 a" style="left:120px;top:300px;width:620px;font-size:68px;--d:.1s">There are <span class="hl">endless</span> local communities, scattered all over the internet.</h2>
+  <p class="abs lead a" style="left:120px;top:640px;width:560px;--d:.25s">WhatsApp groups, Facebook groups, Discord servers, Instagram pages. Each one its own island.</p>
+  <div class="col a fade" style="left:830px;--sp:70s;--d:.3s"><div class="track">
+    <img width="944" height="508" decoding="async" data-src="assets/s2-card-00.webp" alt="The Bangalore club, 7,604 members"><img width="944" height="504" decoding="async" data-src="assets/s2-card-01.webp" alt="Bangalore Weekend traveller, 410K members"><img width="944" height="506" decoding="async" data-src="assets/s2-card-02.webp" alt="Bengaluru WhatsApp community, 1,000+ members"><img width="950" height="508" decoding="async" data-src="assets/s2-card-20.webp" alt="Whats Hot Bangalore, 268K followers">
+    <img width="944" height="508" decoding="async" data-src="assets/s2-card-00.webp" alt=""><img width="944" height="504" decoding="async" data-src="assets/s2-card-01.webp" alt=""><img width="944" height="506" decoding="async" data-src="assets/s2-card-02.webp" alt=""><img width="950" height="508" decoding="async" data-src="assets/s2-card-20.webp" alt="">
+  </div></div>
+  <div class="col rev a fade" style="left:1180px;--sp:80s;--d:.45s"><div class="track">
+    <img width="948" height="508" decoding="async" data-src="assets/s2-card-10.webp" alt="Bangalore StartUps Club, 69K members"><img width="948" height="504" decoding="async" data-src="assets/s2-card-11.webp" alt="Bengaluru Gamers Discord"><img width="948" height="506" decoding="async" data-src="assets/s2-card-12.webp" alt="Peak Bengaluru on X, 85.4K followers"><img width="950" height="504" decoding="async" data-src="assets/s2-card-21.webp" alt="WhatsAround Bangalore, 101K followers">
+    <img width="948" height="508" decoding="async" data-src="assets/s2-card-10.webp" alt=""><img width="948" height="504" decoding="async" data-src="assets/s2-card-11.webp" alt=""><img width="948" height="506" decoding="async" data-src="assets/s2-card-12.webp" alt=""><img width="950" height="504" decoding="async" data-src="assets/s2-card-21.webp" alt="">
+  </div></div>
+  <div class="col a fade" style="left:1530px;--sp:64s;--d:.6s"><div class="track">
+    <img width="950" height="506" decoding="async" data-src="assets/s2-card-22.webp" alt="Bangalore Business Network, 14K members"><img width="950" height="508" decoding="async" data-src="assets/s2-card-20.webp" alt=""><img width="944" height="504" decoding="async" data-src="assets/s2-card-01.webp" alt=""><img width="948" height="506" decoding="async" data-src="assets/s2-card-12.webp" alt="">
+    <img width="950" height="506" decoding="async" data-src="assets/s2-card-22.webp" alt=""><img width="950" height="508" decoding="async" data-src="assets/s2-card-20.webp" alt=""><img width="944" height="504" decoding="async" data-src="assets/s2-card-01.webp" alt=""><img width="948" height="506" decoding="async" data-src="assets/s2-card-12.webp" alt="">
+  </div></div>
+</section>
+
+<!-- 3 · Problem -->
+<section class="slide" id="s3" aria-label="Problem">
+  <h2 class="abs h1 a" style="left:120px;top:150px;width:1500px;--d:.1s">People <span class="hl">can’t discover</span> communities.<br>Communities <span class="hl">can’t reach</span> people.</h2>
+
+  <div class="ring a scale" style="left:410px;top:540px;width:300px;height:300px;background:#060606;--d:.3s"></div>
+  <div class="ring a scale" style="left:1210px;top:540px;width:300px;height:300px;background:#060606;--d:.4s"></div>
+  <div class="ring a scale" style="left:488px;top:618px;width:144px;height:144px;background:#1f1f1f;--d:.4s"></div>
+  <div class="ring a scale" style="left:1288px;top:618px;width:144px;height:144px;background:#1f1f1f;--d:.5s"></div>
+  <img width="100" height="100" decoding="async" class="abs a scale" style="left:515px;top:665px;width:48px;--d:.55s" data-src="assets/s3-p1.webp" alt="">
+  <img width="100" height="100" decoding="async" class="abs a scale" style="left:553px;top:665px;width:48px;--d:.6s" data-src="assets/s3-p2.webp" alt="">
+  <img width="138" height="138" decoding="async" class="abs a scale" style="left:1327px;top:657px;width:66px;--d:.65s" data-src="assets/s3-comm.webp" alt="">
+  <div class="abs h2 a" style="left:410px;width:300px;text-align:center;top:860px;--d:.5s">People</div>
+  <div class="abs h2 a" style="left:1210px;width:300px;text-align:center;top:860px;--d:.6s">Communities</div>
+
+  <svg class="abs" style="left:0;top:0" width="1920" height="1080" viewBox="0 0 1920 1080" fill="none">
+    <defs>
+      <mask id="m3a" maskUnits="userSpaceOnUse"><path class="draw" pathLength="1" style="--d:.8s;--dur:1.4s" d="M610 560 C 720 440, 1200 440, 1310 560" stroke="#fff" stroke-width="14"/></mask>
+      <mask id="m3b" maskUnits="userSpaceOnUse"><path class="draw" pathLength="1" style="--d:1.5s;--dur:1.4s" d="M1310 820 C 1200 940, 720 940, 610 820" stroke="#fff" stroke-width="14"/></mask>
+    </defs>
+    <g mask="url(#m3a)" stroke="#fff" stroke-width="2.4" stroke-dasharray="5 7" stroke-linecap="round">
+      <path d="M610 560 C 720 440, 1200 440, 1310 560"/><path d="M1296 556 L1311 562 L1310 546" stroke-dasharray="none"/>
+    </g>
+    <g mask="url(#m3b)" stroke="#fff" stroke-width="2.4" stroke-dasharray="5 7" stroke-linecap="round">
+      <path d="M1310 820 C 1200 940, 720 940, 610 820"/><path d="M624 824 L609 818 L610 834" stroke-dasharray="none"/>
+    </g>
+  </svg>
+  <div class="pill a scale" style="left:960px;top:448px;transform-origin:center;margin-left:-104px;--d:1.3s">Can’t discover</div>
+  <div class="pill a scale" style="left:960px;top:888px;margin-left:-86px;--d:2s">Can’t reach</div>
+
+  <div class="abs a" style="left:770px;top:585px;width:380px;--d:1.1s">
+    <div class="h3" style="color:#d4d4d4">Missed opportunities</div>
+    <p class="small" style="margin-top:8px;color:#7b7b7b">Valuable local connections, events and experiences slip by because the right communities are hard to find.</p>
+  </div>
+  <div class="abs a" style="left:770px;top:732px;width:380px;--d:1.25s">
+    <div class="h3" style="color:#d4d4d4">Inefficient engagement</div>
+    <p class="small" style="margin-top:8px;color:#7b7b7b">Local communities compete on a global scale to reach a local audience.</p>
+  </div>
+
+  <div class="abs a lt" style="left:120px;top:590px;width:250px;--d:1.6s">
+    <div class="small" style="color:var(--mute)">More than</div>
+    <div class="num" style="font-size:84px;margin:6px 0 10px" data-count="70" data-suffix="%">70%</div>
+    <p class="small" style="color:var(--mute)">find out what’s happening in their city through social media.</p>
+  </div>
+  <div class="abs a rt" style="left:1560px;top:590px;width:250px;--d:2.2s">
+    <div class="small" style="color:var(--mute)">About</div>
+    <div class="num" style="font-size:84px;margin:6px 0 10px" data-count="50" data-suffix="%">50%</div>
+    <p class="small" style="color:var(--mute)">of people frequently miss events because they weren’t informed.</p>
+  </div>
+</section>
+
+<!-- 4 · Solution -->
+<section class="slide" id="s4" aria-label="Solution">
+  <h2 class="abs h1 a" style="left:120px;top:150px;width:1300px;--d:.1s">A place with <span class="hl">communities</span> at the centre.</h2>
+  <p class="abs lead a" style="left:120px;top:228px;width:1200px;--d:.2s">It brings together people, their interests, events and activities.</p>
+
+  <div class="abs a" style="left:120px;top:400px;width:560px;--d:.35s"><div class="prin"><img width="208" height="208" decoding="async" data-src="assets/s6-map.webp" alt=""><div><div class="h2" style="color:#F2453B">Location</div><p class="body" style="margin-top:8px">The stepping stone to a relationship.</p></div></div></div>
+  <div class="abs a" style="left:120px;top:590px;width:560px;--d:.45s"><div class="prin"><img width="208" height="208" decoding="async" data-src="assets/s6-network.webp" alt=""><div><div class="h2" style="color:#FFD98C">Network effects</div><p class="body" style="margin-top:8px">Invites bring people on. Seeing friends in a group is the cue to join.</p></div></div></div>
+  <div class="abs a" style="left:120px;top:800px;width:560px;--d:.55s"><div class="prin"><img width="208" height="208" decoding="async" data-src="assets/s6-puzzle.webp" alt=""><div><div class="h2" style="color:#3C9BE3">Relevance</div><p class="body" style="margin-top:8px">The more relevant the people and communities, the more people use it. Location + interest + network = relevance.</p></div></div></div>
+
+  <div class="abs" style="left:0;top:0;width:1920px;height:1080px;transform:translate(380px,-110px)">
+    <svg class="abs" style="left:0;top:0" width="1920" height="1080" viewBox="0 0 1920 1080" fill="none">
+      <g stroke="#bdbdbd" stroke-width="1.3" stroke-linecap="round" id="links">
+        <path class="draw" pathLength="1" style="--d:1.5s" d="M778 574 C 860 580, 890 700, 964 772"/>
+        <path class="draw" pathLength="1" style="--d:1.58s" d="M683 626 C 668 710, 700 805, 760 832"/>
+        <path class="draw" pathLength="1" style="--d:1.66s" d="M683 626 C 690 770, 770 862, 1018 862"/>
+        <path class="draw" pathLength="1" style="--d:1.74s" d="M1128 549 C 1080 562, 1052 650, 1012 718"/>
+        <path class="draw" pathLength="1" style="--d:1.82s" d="M1128 549 C 1096 584, 1082 640, 1081 692"/>
+        <path class="draw" pathLength="1" style="--d:1.9s" d="M622 795 C 760 790, 790 670, 897 666"/>
+        <path class="draw" pathLength="1" style="--d:1.98s" d="M1005 666 C 1200 668, 1300 720, 1315 830"/>
+        <path class="draw" pathLength="1" style="--d:2.06s" d="M1246 872 C 1180 862, 1140 822, 1118 790"/>
+        <path class="draw" pathLength="1" style="--d:2.14s" d="M778 985 C 812 950, 832 900, 840 860"/>
+        <path class="draw" pathLength="1" style="--d:2.22s" d="M1066 990 C 900 985, 845 920, 840 860"/>
+        <path class="draw" pathLength="1" style="--d:2.3s" d="M1058 988 C 1040 900, 1030 800, 1022 722"/>
+        <path class="draw" pathLength="1" style="--d:2.38s" d="M696 934 C 700 800, 760 690, 897 666"/>
+      </g>
+      <g fill="#FFE873" id="pulses" class="a fade" style="--d:3s"></g>
+    </svg>
+    <div class="abs a fade" style="left:817px;top:600px;font-size:36px;font-weight:700;color:#D6DE8B;letter-spacing:-.01em;--d:.7s">Communities</div>
+    <div class="chip a scale" style="left:897px;top:651px;--d:.8s">Fashion</div>
+    <div class="chip a scale" style="left:784px;top:704px;--d:.85s">Health and fitness</div>
+    <div class="chip a scale" style="left:1018px;top:700px;--d:.9s">Explorers</div>
+    <div class="chip a scale" style="left:790px;top:762px;--d:.95s">Blr Start up</div>
+    <div class="chip a scale" style="left:967px;top:758px;--d:1s">Book worms</div>
+    <div class="chip a scale" style="left:762px;top:817px;--d:1.05s">Intellectuals</div>
+    <div class="chip a scale" style="left:932px;top:820px;--d:1.1s">Cooking Club</div>
+    <div class="a" style="--d:1.15s"><div class="person" style="left:629px;top:557px"><img width="44" height="44" decoding="async" data-src="assets/s6-anusha.webp" alt="">Anusha</div><div class="tag" style="left:668px;top:526px">Asian cuisine</div><div class="tag" style="left:588px;top:595px">Reading</div><div class="tag" style="left:685px;top:605px">Cooking</div></div>
+    <div class="a" style="--d:1.2s"><div class="person" style="left:1168px;top:532px"><img width="44" height="44" decoding="async" data-src="assets/s6-rohan.webp" alt="">Rohan</div><div class="tag" style="left:1222px;top:506px">Swimming</div><div class="tag" style="left:1127px;top:566px">Stand up</div><div class="tag" style="left:1233px;top:577px">Karaoke</div></div>
+    <div class="a" style="--d:1.25s"><div class="person" style="left:466px;top:783px"><img width="44" height="44" decoding="async" data-src="assets/s6-sanshi.webp" alt="">Sanshi</div><div class="tag" style="left:495px;top:752px">Shopping</div><div class="tag" style="left:451px;top:822px">Nails</div><div class="tag" style="left:532px;top:817px">Cosmetics</div></div>
+    <div class="a" style="--d:1.3s"><div class="person" style="left:1276px;top:858px"><img width="44" height="44" decoding="async" data-src="assets/s6-krithi.webp" alt="">Krithi</div><div class="tag" style="left:1245px;top:833px">MMA</div><div class="tag" style="left:1332px;top:833px">Anime</div><div class="tag" style="left:1260px;top:894px">Music</div></div>
+    <div class="a" style="--d:1.35s"><div class="person" style="left:651px;top:970px"><img width="44" height="44" decoding="async" data-src="assets/s6-sid.webp" alt="">Sid</div><div class="tag" style="left:636px;top:936px">Football</div><div class="tag" style="left:614px;top:1018px">Podcasts</div><div class="tag" style="left:718px;top:1013px">Design</div></div>
+    <div class="a" style="--d:1.4s"><div class="person" style="left:1076px;top:976px"><img width="44" height="44" decoding="async" data-src="assets/s6-sahil.webp" alt="">Sahil</div><div class="tag" style="left:1070px;top:943px">Skating</div><div class="tag" style="left:1178px;top:1004px">Movies</div><div class="tag" style="left:1073px;top:1022px">Memes</div></div>
+  </div>
+</section>
+
+<!-- 5 · Approach -->
+<section class="slide" id="s5" aria-label="Approach">
+  <h2 class="abs h1 a" style="left:120px;top:150px;width:1400px;--d:.1s">People, communities and events,<br>finally in one place.</h2>
+  <div class="ring a lt" style="left:280px;top:380px;width:400px;height:400px;background:rgba(12,70,14,.75);--d:.3s"></div>
+  <div class="ring a rt" style="left:400px;top:380px;width:400px;height:400px;background:rgba(78,72,6,.62);--d:.4s"></div>
+  <div class="ring a" style="left:340px;top:490px;width:400px;height:400px;background:rgba(14,36,100,.55);--d:.5s"></div>
+  <img width="410" height="410" decoding="async" class="abs a scale" style="left:485px;top:551px;width:110px;border-radius:50%;--d:.8s" data-src="assets/ts-icon.webp" alt="Townsquare">
+
+  <div class="abs a" style="left:1000px;top:360px;width:800px;--d:.7s">
+    <div class="h2" style="color:#A9F7B2">People</div>
+    <p class="body" style="margin-top:10px">Find people who are into the same things, interact with them and their communities, and stay updated on what’s happening in your city.</p>
+  </div>
+  <div class="abs a" style="left:1000px;top:575px;width:800px;--d:.85s">
+    <div class="h2" style="color:#FFF7A0">Community</div>
+    <p class="body" style="margin-top:10px">Every community in your city in one place, with tools to create and grow your own, and network effects that drive high-quality engagement.</p>
+  </div>
+  <div class="abs a" style="left:1000px;top:790px;width:800px;--d:1s">
+    <div class="h2" style="color:#A3D5FF">Activities and events</div>
+    <p class="body" style="margin-top:10px">Find what’s on near you, bring your friends along, and discover experiences you’d never have come across otherwise.</p>
+  </div>
+</section>
+
+<!-- 6 · Product: feed -->
+<section class="slide" id="s6" aria-label="The product: your feed">
+  <h2 class="abs h1 a" style="left:120px;top:150px;width:600px;--d:.1s">The app for discovering <span class="hl">people and things</span> in your city.</h2>
+  <p class="abs lead a" style="left:120px;top:470px;width:520px;--d:.25s">We aggregate all the high-interest people and groups within your city, and introduce you through friends.</p>
+  <img width="960" height="1403" decoding="async" class="abs a rise" style="left:760px;top:203px;width:600px;--d:.3s" data-src="assets/s8-phone.webp" alt="Townsquare feed showing a book club, a karaoke night and a skating community">
+  <svg class="abs" style="left:0;top:0" width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" stroke-width="1.4">
+    <path class="draw" pathLength="1" style="--d:1s;--dur:.7s" d="M1302 426 L1350 380 L1428 380" stroke="#BAFFC1"/>
+    <path class="draw" pathLength="1" style="--d:1.5s;--dur:.8s" d="M974 682 L1350 640 L1428 640" stroke="#9ED0FF"/>
+    <path class="draw" pathLength="1" style="--d:2s;--dur:.8s" d="M1062 912 L1428 912" stroke="#FDFFA4"/>
+  </svg>
+  <div class="abs a rt" style="left:1440px;top:362px;width:400px;--d:1.3s"><div class="h3" style="color:#BAFFC1">People</div><p class="body" style="margin-top:8px">Meet new people, introduced through mutual friends.</p></div>
+  <div class="abs a rt" style="left:1440px;top:622px;width:400px;--d:1.8s"><div class="h3" style="color:#9ED0FF">Events and activities</div><p class="body" style="margin-top:8px">See what your friends and people you follow are going to.</p></div>
+  <div class="abs a rt" style="left:1440px;top:894px;width:400px;--d:2.3s"><div class="h3" style="color:#FDFFA4">Communities</div><p class="body" style="margin-top:8px">High-interest groups in your city, like skating in Cubbon Park.</p></div>
+</section>
+
+<!-- 7 · Product: community -->
+<section class="slide" id="s7" aria-label="The product: communities near you">
+  <h2 class="abs h1 a" style="left:120px;top:150px;width:640px;--d:.1s">Find communities near you, and the friends already in them.</h2>
+  <div class="abs steps" style="left:120px;top:530px;width:600px">
+    <div class="step a" style="--d:.9s"><b>1</b><div><div class="h3">Communities close to you</div><p class="body" style="margin-top:6px">Sorted by distance, literally around the corner.</p></div></div>
+    <div class="step a" style="--d:1.15s"><b>2</b><div><div class="h3">Friends already inside</div><p class="body" style="margin-top:6px">See which of your friends are part of which communities.</p></div></div>
+    <div class="step a" style="--d:1.4s"><b>3</b><div><div class="h3">People like you</div><p class="body" style="margin-top:6px">Find people interested in the same things you are.</p></div></div>
+  </div>
+  <img width="1600" height="1352" decoding="async" class="abs a rise" style="left:820px;top:170px;width:1000px;--d:.25s" data-src="assets/s9-phones.webp" alt="Townsquare screens: communities near you, and the Blr Startups community page">
+  <div class="badge a scale" style="left:880px;top:681px;--d:1s">1</div>
+  <div class="badge a scale" style="left:1716px;top:600px;--d:1.25s">2</div>
+  <div class="badge a scale" style="left:1560px;top:802px;--d:1.5s">3</div>
+</section>
+
+<!-- 8 · Why now -->
+<section class="slide" id="s8" aria-label="Why now">
+  <h2 class="abs h1 a" style="left:120px;top:150px;width:1500px;--d:.1s">The timing couldn’t be better.</h2>
+  <p class="abs lead a" style="left:120px;top:228px;width:1300px;--d:.2s">Everything else in our lives has gone local and personal. Community is next.</p>
+
+  <div class="card a" style="left:120px;top:350px;width:760px;height:620px;padding:52px;display:flex;flex-direction:column;--d:.35s">
+    <div style="display:flex;gap:4px"><img width="290" height="290" decoding="async" data-src="assets/s4-pin1.webp" alt="" style="width:190px"><img width="290" height="290" decoding="async" data-src="assets/s4-pin2.webp" alt="" style="width:190px;margin-left:-34px"></div>
+    <div class="h2" style="font-size:44px;margin-top:auto">Rise of location-based services</div>
+    <p class="body" style="font-size:24px;margin-top:18px">People love fast, location-based services and personalised recommendations, from food delivery to travel. They now expect the same for their communities.</p>
+  </div>
+
+  <div class="card a" style="left:920px;top:350px;width:420px;height:298px;padding:34px;--d:.5s">
+    <div style="display:flex;gap:18px;align-items:center"><img width="250" height="250" decoding="async" data-src="assets/s4-robot.webp" alt="" style="width:72px"><div class="h3">AI and ML make it personal</div></div>
+    <p class="body" style="font-size:19px;margin-top:16px">AI, machine learning and mobile tech make personalised, location-aware experiences possible.</p>
+  </div>
+  <div class="card a" style="left:1380px;top:350px;width:420px;height:298px;padding:34px;--d:.6s">
+    <div style="display:flex;gap:18px;align-items:center"><img width="260" height="260" decoding="async" data-src="assets/s4-shop.webp" alt="" style="width:72px"><div class="h3">The local movement</div></div>
+    <p class="body" style="font-size:19px;margin-top:16px">Small businesses, local events and grassroots groups are building an online presence on every platform.</p>
+  </div>
+  <div class="card a" style="left:920px;top:672px;width:420px;height:298px;padding:34px;--d:.7s">
+    <div style="display:flex;gap:18px;align-items:center"><img width="220" height="220" decoding="async" data-src="assets/s4-network.webp" alt="" style="width:72px"><div class="h3">Changing social dynamics</div></div>
+    <p class="body" style="font-size:19px;margin-top:16px">There’s a renewed focus on community and local relationships.</p>
+  </div>
+  <div class="card a" style="left:1380px;top:672px;width:420px;height:298px;padding:34px;--d:.8s">
+    <div style="display:flex;gap:18px;align-items:center"><div style="position:relative;width:72px;height:72px;flex:none"><img width="220" height="220" decoding="async" data-src="assets/s4-phone.webp" alt="" style="position:absolute;left:8px;width:66px"><img width="220" height="220" decoding="async" data-src="assets/s4-arrow.webp" alt="" style="position:absolute;left:-14px;width:66px"></div><div class="h3">Growing digital dependence</div></div>
+    <p class="body" style="font-size:19px;margin-top:16px">Every part of life depends on the internet. Our cities going digital is the obvious next step.</p>
+  </div>
+</section>
+
+<!-- 9 · Market -->
+<section class="slide" id="s9" aria-label="Market opportunity">
+  <h2 class="abs h1 a" style="left:120px;top:150px;width:1500px;--d:.1s">A <span class="hl">$60 million</span> a year opportunity in India.</h2>
+  <div class="abs a" style="left:120px;top:240px;display:flex;gap:12px;align-items:center;--d:.2s">
+    <span class="lead">Target:</span>
+    <span style="display:flex;gap:8px;align-items:center;font-size:22px;background:#1c1c28;color:#8a8df0;border-radius:999px;padding:6px 16px">Tier 1 cities <img width="48" height="48" decoding="async" data-src="assets/s13-city.webp" alt="" style="width:24px"></span>
+    <span style="display:flex;gap:4px;align-items:center;font-size:22px;background:#241616;color:#EF6262;border-radius:999px;padding:6px 16px">20–35 years old <img width="48" height="48" decoding="async" data-src="assets/s13-m.webp" alt="" style="width:24px"><img width="48" height="48" decoding="async" data-src="assets/s13-f.webp" alt="" style="width:24px"></span>
+  </div>
+
+  <svg class="abs" style="left:0;top:0" width="1920" height="1080" viewBox="0 0 1920 1080" fill="none">
+    <circle cx="640" cy="660" r="250" fill="#1a1a1a" class="a scale" style="--d:.3s;transform-origin:640px 660px"/>
+    <circle cx="640" cy="660" r="250" stroke="#234652" stroke-width="14" class="draw" pathLength="1" style="--d:.45s;--dur:1.3s" transform="rotate(-90 640 660)"/>
+    <circle cx="1400" cy="660" r="250" fill="#1a1a1a" class="a scale" style="--d:.9s;transform-origin:1400px 660px"/>
+    <circle cx="1400" cy="660" r="250" stroke="#234d22" stroke-width="14" class="draw" pathLength="1" style="--d:1.05s;--dur:1.3s" transform="rotate(-90 1400 660)"/>
+  </svg>
+  <div class="abs a" style="left:460px;top:520px;width:380px;--d:.55s">
+    <div class="small" style="color:var(--mute);letter-spacing:.12em;text-transform:uppercase;font-weight:600">TAM in India</div>
+    <div class="num" style="font-size:116px;color:#36E4FF;margin-top:12px"><span data-count="21">21</span>M</div>
+    <p class="small" style="margin-top:14px;color:#9a9a9a">20–35 year olds across<br>7 metropolitan cities</p>
+  </div>
+  <div class="abs a scale" style="left:1020px;top:660px;transform-origin:center;--d:.8s">
+    <div style="margin:-56px 0 0 -100px;width:200px;text-align:center">
+      <div style="display:inline-block;background:#1c1c28;color:#8a8df0;font-size:34px;font-weight:700;border-radius:999px;padding:8px 22px">× $2–4</div>
+      <p class="small" style="margin-top:10px">avg revenue per user<br>(Asia platforms)</p>
+    </div>
+  </div>
+  <div class="abs a" style="left:1220px;top:520px;width:380px;--d:1.15s">
+    <div class="small" style="color:var(--mute);letter-spacing:.12em;text-transform:uppercase;font-weight:600">Annual revenue</div>
+    <div class="num" style="font-size:116px;color:#2DFF2D;margin-top:12px">$<span data-count="60">60</span>M</div>
+    <p class="small" style="margin-top:14px;color:#9a9a9a">a year, in India alone</p>
+  </div>
+  <p class="abs small a fade" style="left:120px;top:1000px;--d:1.5s">Source: Indian Council of Medical Research. ARPU averaged across similar platforms in Asia.</p>
+</section>
+
+<!-- 10 · Competition -->
+<section class="slide" id="s10" aria-label="Competition">
+  <h2 class="abs h1 a" style="left:120px;top:150px;width:560px;--d:.1s">Others are nearby <i style="font-style:normal;color:#666">or</i> relevant. <span class="hl">Townsquare is both.</span></h2>
+  <div class="abs a" style="left:120px;top:560px;width:520px;--d:.3s">
+    <div class="h3" style="color:#d4d4d4">Close by, not relevant</div><p class="body" style="margin-top:6px;font-size:19px">Dating and anonymous apps know where you are, not what you love.</p>
+    <div class="h3" style="color:#d4d4d4;margin-top:34px">Relevant, not close by</div><p class="body" style="margin-top:6px;font-size:19px">Social networks know your interests, not your neighbourhood.</p>
+  </div>
+  <div class="abs a fade" style="left:1280px;top:280px;width:530px;height:370px;background:rgba(51,70,224,.09);border-radius:0 24px 0 0;--d:1.6s"></div>
+  <svg class="abs" style="left:0;top:0" width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round">
+    <path class="draw" pathLength="1" style="--d:.3s;--dur:1s" stroke-width="2.4" d="M1280 1040 V282 M1270 294 L1280 282 L1290 294"/>
+    <path class="draw" pathLength="1" style="--d:.4s;--dur:1s" stroke-width="2.4" d="M770 650 H1808 M1796 640 L1808 650 L1796 660"/>
+  </svg>
+  <div class="abs a fade" style="left:1300px;top:270px;font-size:22px;font-weight:600;--d:.9s">Proximity</div>
+  <div class="abs a fade" style="left:1690px;top:670px;font-size:22px;font-weight:600;--d:.9s">Relevance</div>
+  <div class="logo a scale" style="left:975px;top:347px;--d:.8s"><img width="178" height="178" decoding="async" data-src="assets/s10-yik.webp" alt="Yik Yak"></div>
+  <div class="logo a scale" style="left:888px;top:451px;--d:.86s"><img width="178" height="178" decoding="async" data-src="assets/s10-tinder.webp" alt="Tinder"></div>
+  <div class="logo a scale" style="left:826px;top:552px;--d:.92s"><img width="178" height="178" decoding="async" data-src="assets/s10-bumble.webp" alt="Bumble"></div>
+  <div class="logo a scale" style="left:982px;top:535px;--d:.98s"><img width="178" height="178" decoding="async" data-src="assets/s10-hinge.webp" alt="Hinge"></div>
+  <div class="logo a scale" style="left:1186px;top:760px;--d:1.06s"><img width="178" height="178" decoding="async" data-src="assets/s10-reddit.webp" alt="Reddit"></div>
+  <div class="logo a scale" style="left:1060px;top:860px;--d:1.12s"><img width="178" height="178" decoding="async" data-src="assets/s10-ana.webp" alt="Anonymous chat app"></div>
+  <div class="logo a scale" style="left:1520px;top:800px;--d:1.2s"><img width="178" height="178" decoding="async" data-src="assets/s10-fb.webp" alt="Facebook"></div>
+  <div class="logo a scale" style="left:1420px;top:950px;--d:1.26s"><img width="178" height="178" decoding="async" data-src="assets/s10-ig.webp" alt="Instagram"></div>
+  <div class="logo a scale" style="left:1620px;top:950px;--d:1.32s"><img width="178" height="178" decoding="async" data-src="assets/s10-x.webp" alt="X"></div>
+  <div class="a fade" style="--d:1.8s"><div class="halo" style="left:1546px;top:380px;width:140px;height:140px"></div></div>
+  <div class="ring a scale" style="left:1546px;top:380px;width:140px;height:140px;border:1.5px solid #3346e0;--d:1.7s"></div>
+  <img width="410" height="410" decoding="async" class="abs a scale" style="left:1576px;top:410px;width:80px;border-radius:50%;--d:1.6s" data-src="assets/ts-icon.webp" alt="Townsquare: high proximity and high relevance">
+</section>
+
+<!-- 11 · Business model -->
+<section class="slide" id="s11" aria-label="Business model">
+  <div class="rip" style="left:1415px;top:470px;width:1000px;height:1000px;background:#070707"></div>
+  <div class="rip" style="left:1415px;top:470px;width:720px;height:720px;background:#0d0d0d"></div>
+  <div class="rip" style="left:1415px;top:470px;width:480px;height:480px;background:#101010"></div>
+  <div class="wave" style="left:1415px;top:470px"></div><div class="wave" style="left:1415px;top:470px;animation-delay:2.3s"></div><div class="wave" style="left:1415px;top:470px;animation-delay:4.6s"></div>
+  <h2 class="abs h1 a" style="left:120px;top:150px;width:860px;font-size:64px;--d:.1s">Local, highly targeted advertising <img width="186" height="186" decoding="async" data-src="assets/s11-target.webp" alt="" style="display:inline-block;width:64px;vertical-align:-10px"></h2>
+  <p class="abs lead a" style="left:120px;top:325px;--d:.2s">Interests + proximity + strong network effects</p>
+  <ul class="abs dotlist" style="left:120px;top:440px;width:780px">
+    <li class="a" style="--d:.9s">High-interest groups mean relevant ads reach relevant people.</li>
+    <li class="a" style="--d:1.05s">Strong network effects between users build a lot of trust.</li>
+    <li class="a" style="--d:1.2s">Local businesses get far better reach to local audiences.</li>
+  </ul>
+  <img width="848" height="1070" decoding="async" class="abs a rise" style="left:1150px;top:136px;width:530px;--d:.35s" data-src="assets/s12-phones.webp" alt="Ads from local businesses shown inside high-interest communities">
+  <div class="abs small a fade" style="left:120px;top:796px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--mute);--d:1.35s">Plus</div>
+  <div class="stream a" style="left:120px;--d:1.45s"><h4 style="color:#FFD95A"><img width="128" height="128" decoding="async" data-src="assets/s11-ticket.webp" alt="">2–4% on each pass</h4><p>A cut of every ticket sold for an event.</p></div>
+  <div class="stream a" style="left:692px;--d:1.55s"><h4 style="color:#9a7cf0"><img width="108" height="108" decoding="async" data-src="assets/s11-vr.webp" alt="">Virtual experiences</h4><p>Our own curated digital experiences, like virtual games and dating.</p></div>
+  <div class="stream a" style="left:1264px;--d:1.65s"><h4 style="color:#3DA5F2"><img width="106" height="106" decoding="async" data-src="assets/s11-badge.webp" alt="">Subscriptions</h4><p>Premium features to manage communities better and reach more people.</p></div>
+</section>
+
+<!-- 12 · Team -->
+<section class="slide" id="s12" aria-label="Why us">
+  <h2 class="abs h1 a" style="left:120px;top:150px;width:1500px;--d:.1s">We had this problem. Tired of looking<br>for a solution, we decided to <span class="hl">build one.</span></h2>
+  <div class="founder a" style="left:120px;--d:.3s">
+    <div style="display:flex;gap:26px;align-items:center"><img width="184" height="184" decoding="async" data-src="assets/s5-sudarshan.webp" alt="Sudarshan Senthil Kumar" style="width:96px;border-radius:50%"><div><div class="h2">Sudarshan Senthil Kumar</div><div class="small" style="letter-spacing:.14em;font-weight:600;margin-top:6px;color:var(--mute)">CEO · CS, BMSCE 2021</div></div></div>
+    <p class="body" style="margin-top:34px;font-size:22px">Full-stack engineer with experience in <span style="color:#fff">game dev, AI, and web and app development.</span></p>
+    <p class="body" style="margin-top:18px;font-size:22px">Built a gaming startup in college, then a six-figure software agency.</p>
+  </div>
+  <div class="founder a" style="left:980px;--d:.42s">
+    <div style="display:flex;gap:26px;align-items:center"><img width="184" height="184" decoding="async" data-src="assets/s5-siddharth.webp" alt="Siddharth Mallappa" style="width:96px;border-radius:50%"><div><div class="h2">Siddharth Mallappa</div><div class="small" style="letter-spacing:.14em;font-weight:600;margin-top:6px;color:var(--mute)">COO · CS, BMSCE 2021</div></div></div>
+    <p class="body" style="margin-top:34px;font-size:22px">Professional <span style="color:#fff">UI/UX and front-end engineer.</span></p>
+    <p class="body" style="margin-top:18px;font-size:22px">Extensive experience in sales, marketing and product positioning.</p>
+  </div>
+  <div class="proof a" style="left:120px;width:400px;--d:.7s"><b>Deep research</b>Spent a long time studying the social space.</div>
+  <div class="proof a" style="left:550px;width:400px;--d:.8s"><b>Complementary skills</b>Tech × design, in one founding team.</div>
+  <div class="proof a" style="left:980px;width:400px;--d:.9s"><b>Idea → users’ hands</b>We take products all the way to launch.</div>
+  <div class="proof a" style="left:1410px;width:390px;background:#2a2510;color:#e8d9a0;--d:1.05s"><b style="display:flex;gap:10px;align-items:center;color:#FFE873"><img width="74" height="74" decoding="async" data-src="assets/s5-rocket.webp" alt="" style="width:30px">Live now</b>The product is out and we’re taking feedback.</div>
+</section>
+
+<!-- 13 · Ask -->
+<section class="slide" id="s13" aria-label="Our ask">
+  <div class="abs a" style="left:120px;top:200px;--d:.1s">
+    <div class="lead">We’re raising</div>
+    <div class="num" style="font-size:150px;color:#1FF21F;margin-top:10px">$<span data-count="250000" data-sep="1">250,000</span></div>
+    <div class="lead" style="margin-top:14px">to build and launch over <span style="color:#fff">2 years</span>.</div>
+  </div>
+  <div class="abs" style="left:120px;top:590px;width:700px;display:flex;flex-direction:column;gap:30px">
+    <div class="a" style="display:flex;gap:20px;align-items:flex-start;--d:1.1s"><span style="flex:none;position:relative;width:56px"><img width="112" height="112" decoding="async" data-src="assets/s14-dev.webp" alt="" style="width:52px"><i style="position:absolute;right:-4px;bottom:-2px;width:14px;height:14px;border-radius:4px;background:#8a8a5c"></i></span><div><div class="h3">Hiring engineers</div><p class="body" style="margin-top:4px">1 backend engineer, 1 Flutter engineer for the app</p></div></div>
+    <div class="a" style="display:flex;gap:20px;align-items:flex-start;--d:1.25s"><span style="flex:none;position:relative;width:56px"><img width="168" height="168" decoding="async" data-src="assets/s14-server.webp" alt="" style="width:52px"><i style="position:absolute;right:-4px;bottom:-2px;width:14px;height:14px;border-radius:4px;background:#4a50a0"></i></span><div><div class="h3">Servers and operations</div><p class="body" style="margin-top:4px">Infrastructure and running costs</p></div></div>
+    <div class="a" style="display:flex;gap:20px;align-items:flex-start;--d:1.4s"><span style="flex:none;position:relative;width:56px"><img width="164" height="164" decoding="async" data-src="assets/s14-mega.webp" alt="" style="width:52px"><i style="position:absolute;right:-4px;bottom:-2px;width:14px;height:14px;border-radius:4px;background:#6fae7a"></i></span><div><div class="h3">Marketing</div><p class="body" style="margin-top:4px">Ads and a promotional campaign</p></div></div>
+  </div>
+  <svg class="abs" style="left:0;top:0" width="1920" height="1080" viewBox="0 0 1920 1080" fill="none">
+    <defs><mask id="m13" maskUnits="userSpaceOnUse"><circle class="draw" pathLength="1" style="--d:.4s;--dur:1.6s" cx="1340" cy="560" r="190" stroke="#fff" stroke-width="384" transform="rotate(-90 1340 560)"/></mask></defs>
+    <g mask="url(#m13)">
+      <path d="M1340 560 L1340 180 A380 380 0 0 1 1530 889 Z" fill="#23264a"/>
+      <path d="M1340 560 L1530 889 A380 380 0 0 1 1340 940 Z" fill="#3E4E45" stroke="#8BE88B" stroke-width="1.2"/>
+      <path d="M1340 560 L1340 940 A380 380 0 0 1 1340 180 Z" fill="#3A3B2B" stroke="#E57A73" stroke-width="1.2"/>
+    </g>
+    <circle cx="1340" cy="560" r="185" fill="#0a0a0a" class="a fade" style="--d:.3s"/>
+  </svg>
+  <img width="130" height="130" decoding="async" class="abs a scale" style="left:1275px;top:460px;width:130px;--d:1.6s" data-src="assets/s14-money.webp" alt="">
+      </section>
+
+</div></div>
+
+<div id="bar"><i></i></div>
+<div id="hint">Use ← → or swipe</div>
+<div id="rot">Turn your phone sideways for a bigger view</div>
+<nav id="ctrl" aria-label="Slide controls">
+  <button id="prev" aria-label="Previous slide"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+  <span id="count">1 / 13</span>
+  <button id="next" aria-label="Next slide"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+  <button id="replay" aria-label="Replay slide animation"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+  <button id="fs" aria-label="Full screen"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+</nav>
+
+<script>
+(function(){
+  var stage=document.getElementById('stage'),slides=[].slice.call(document.querySelectorAll('.slide')),N=slides.length,cur=-1,outT;
+  function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform='scale('+s+') translate(-50%,-50%)'}
+  addEventListener('resize',fit);fit();
+  function fmt(v,sep){return sep?Math.round(v).toLocaleString('en-US'):String(Math.round(v))}
+  function countUp(sl){
+    sl.querySelectorAll('[data-count]').forEach(function(el){
+      var end=+el.dataset.count,suf=el.dataset.suffix||'',sep=el.dataset.sep,wrap=el.closest('.a'),
+          delay=wrap?parseFloat(getComputedStyle(wrap).getPropertyValue('--d'))||0:0,dur=1500,t0=null;
+      el.textContent=fmt(0,sep)+suf;
+      setTimeout(function(){
+        function f(t){if(!t0)t0=t;var p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,4);
+          el.textContent=fmt(end*e,sep)+suf;if(p<1&&sl.classList.contains('on'))requestAnimationFrame(f);else el.textContent=fmt(end,sep)+suf}
+        requestAnimationFrame(f);
+      },delay*1000+200);
+    });
+  }
+  function warm(i){for(var j=i-1;j<=i+2;j++){var sl=slides[j];if(!sl)continue;sl.querySelectorAll('img[data-src]').forEach(function(im){im.src=im.dataset.src;im.removeAttribute('data-src')})}}
+  addEventListener('load',function(){var k=0;(function step(){if(k>=N)return;warm(k);k+=2;setTimeout(step,250)})()});
+  function go(i,replay){
+    i=Math.max(0,Math.min(N-1,i));if(i===cur&&!replay)return;warm(i);
+    var old=slides[cur];
+    if(old&&old!==slides[i]){old.classList.remove('on');old.classList.add('out');clearTimeout(outT);outT=setTimeout(function(){old.classList.remove('out')},650)}
+    var sl=slides[i];sl.classList.remove('on','out');void sl.offsetWidth;
+    requestAnimationFrame(function(){sl.classList.add('on');countUp(sl)});
+    cur=i;document.getElementById('count').textContent=(i+1)+' / '+N;
+    document.querySelector('#bar i').style.width=((i+1)/N*100)+'%';
+    try{history.replaceState(null,'','#slide-'+(i+1))}catch(e){}
+  }
+  function next(){go(cur+1)}function prev(){go(cur-1)}
+  addEventListener('keydown',function(e){
+    if(['ArrowRight','PageDown',' ','Enter'].indexOf(e.key)>-1){e.preventDefault();next()}
+    else if(['ArrowLeft','PageUp','Backspace'].indexOf(e.key)>-1){e.preventDefault();prev()}
+    else if(e.key==='Home')go(0);else if(e.key==='End')go(N-1);else if(e.key==='f')toggleFs();
+    wake();
+  });
+  document.getElementById('next').onclick=function(e){e.stopPropagation();next()};
+  document.getElementById('prev').onclick=function(e){e.stopPropagation();prev()};
+  document.getElementById('replay').onclick=function(e){e.stopPropagation();go(cur,true)};
+  function toggleFs(){try{if(document.fullscreenElement)document.exitFullscreen();else{var p=document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();if(p&&p.catch)p.catch(function(){})}}catch(e){}}
+  document.getElementById('fs').onclick=function(e){e.stopPropagation();toggleFs()};
+  document.getElementById('viewport').addEventListener('click',function(e){(e.clientX<innerWidth*0.3?prev:next)()});
+  var sx=null,sy=0;
+  addEventListener('touchstart',function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+  addEventListener('touchend',function(e){if(sx===null)return;var dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy))(dx<0?next:prev)();sx=null});
+  var idleT;function wake(){document.body.classList.remove('idle');clearTimeout(idleT);idleT=setTimeout(function(){document.body.classList.add('idle')},2600)}
+  addEventListener('mousemove',wake);addEventListener('touchstart',wake,{passive:true});wake();
+  setTimeout(function(){document.getElementById('hint').classList.add('gone')},3500);
+  var g=document.getElementById('pulses');
+  document.querySelectorAll('#links path').forEach(function(p,k){
+    if(k%2)return;
+    var c=document.createElementNS('http://www.w3.org/2000/svg','circle');c.setAttribute('r','3');
+    var am=document.createElementNS('http://www.w3.org/2000/svg','animateMotion');
+    am.setAttribute('dur',(3.4+(k%3)*0.6)+'s');am.setAttribute('repeatCount','indefinite');am.setAttribute('begin',(k*0.4)+'s');am.setAttribute('path',p.getAttribute('d'));
+    am.setAttribute('calcMode','spline');am.setAttribute('keyTimes','0;1');am.setAttribute('keySplines','.45 0 .55 1');am.setAttribute('keyPoints',(k%4?'1;0':'0;1'));
+    var op=document.createElementNS('http://www.w3.org/2000/svg','animate');
+    op.setAttribute('attributeName','opacity');op.setAttribute('values','0;.9;.9;0');op.setAttribute('dur',am.getAttribute('dur'));op.setAttribute('repeatCount','indefinite');op.setAttribute('begin',am.getAttribute('begin'));
+    c.appendChild(am);c.appendChild(op);g.appendChild(c);
+  });
+  var m=/^#slide-(\d+)$/.exec(location.hash);go(m?(+m[1]-1):0);
+  addEventListener('hashchange',function(){var m=/^#slide-(\d+)$/.exec(location.hash);if(m)go(+m[1]-1)});
+})();
+</script>
+</body>
+</html>
