@@ -42,6 +42,7 @@ function cur(){return r.dataset.theme||(matchMedia('(prefers-color-scheme: dark)
 function label(){var n=cur()==='dark'?'light':'dark';b.textContent=n==='dark'?'Dark':'Light';b.setAttribute('aria-label','Switch to '+n+' theme')}
 b.addEventListener('click',function(){var n=cur()==='dark'?'light':'dark';r.dataset.theme=n;try{localStorage.setItem('theme',n)}catch(e){}label()});label();})();
 </script>
+<script src="/assets/peek.js" defer></script>
 <script src="/assets/favicon.js" defer></script>
 </body>
 </html>
