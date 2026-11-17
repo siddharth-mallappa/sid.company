@@ -221,3 +221,46 @@ dialog.lb::backdrop { background: transparent; }
 }
 .gal-item:hover .gal-zoom, .gal-item:focus-visible .gal-zoom { opacity: 1; transform: none; }
 @media (hover: none) { .gal-zoom { opacity: .85; transform: none; width: 24px; height: 24px; background-size: 12px; } }
+
+/* ---------- EasyDocument: animated logo construction ---------- */
+.frame.ed { background: linear-gradient(125deg, #0E1224 0%, #0B3EE5 45%, #453ADD 75%, #0E1224 100%); background-size: 260% 260%; animation: ed-bg 14s ease-in-out infinite alternate; }
+.ed-anim { width: 100%; height: 100%; display: block; }
+.ed-anim .g { fill: none; stroke: rgba(255,255,255,.7); stroke-width: .8; vector-effect: non-scaling-stroke; }
+.ed-anim .gl, .ed-anim .gv { stroke-dasharray: 200; stroke-dashoffset: 200; animation: ed-draw 7s cubic-bezier(.6,0,.2,1) infinite; animation-delay: var(--d, 0s); }
+.ed-anim .gc { stroke-dasharray: 30; stroke-dashoffset: 30; animation: ed-circ 7s ease infinite; }
+.ed-anim .bar { fill: #fff; opacity: 0; animation: 7s cubic-bezier(.2,.8,.2,1) infinite; }
+.ed-anim .b1 { animation-name: ed-b1; fill: #fff; }
+.ed-anim .b2 { animation-name: ed-b2; fill: #9DB2FF; }
+.ed-anim .b3 { animation-name: ed-b3; fill: #fff; }
+.ed-anim .wm { font: 500 10.5px "Inter", "Helvetica Neue", Arial, sans-serif; fill: #fff; letter-spacing: -.02em; opacity: 0; animation: ed-wm 7s ease infinite; }
+.ed-anim .wm tspan { fill: #9DB2FF; }
+@keyframes ed-bg { from { background-position: 0% 30%; } to { background-position: 100% 70%; } }
+@keyframes ed-draw { 0% { stroke-dashoffset: 200; opacity: 1; } 16% { stroke-dashoffset: 0; opacity: 1; } 50% { opacity: .9; } 62%, 86% { stroke-dashoffset: 0; opacity: .18; } 96%, 100% { stroke-dashoffset: 0; opacity: 0; } }
+@keyframes ed-circ { 0%, 10% { stroke-dashoffset: 30; opacity: 1; } 24% { stroke-dashoffset: 0; opacity: 1; } 50% { opacity: .8; } 62%, 86% { stroke-dashoffset: 0; opacity: 0; } 100% { opacity: 0; } }
+@keyframes ed-b1 { 0%, 22% { opacity: 0; transform: translateX(-14px); } 34%, 88% { opacity: 1; transform: none; } 97%, 100% { opacity: 0; transform: none; } }
+@keyframes ed-b2 { 0%, 28% { opacity: 0; transform: translateX(14px); } 40%, 88% { opacity: 1; transform: none; } 97%, 100% { opacity: 0; transform: none; } }
+@keyframes ed-b3 { 0%, 34% { opacity: 0; transform: translateX(-14px); } 46%, 88% { opacity: 1; transform: none; } 97%, 100% { opacity: 0; transform: none; } }
+@keyframes ed-wm { 0%, 46% { opacity: 0; transform: translateY(3px); } 56%, 88% { opacity: 1; transform: none; } 97%, 100% { opacity: 0; } }
+.ed-anim .wm { transform-box: fill-box; }
+@media (prefers-reduced-motion: reduce) {
+  .frame.ed, .ed-anim .g, .ed-anim .bar, .ed-anim .wm { animation: none !important; }
+  .ed-anim .bar, .ed-anim .wm { opacity: 1; } .ed-anim .g { opacity: .15; stroke-dashoffset: 0; }
+}
+
+/* ---------- Project tabs ---------- */
+.tabs { margin-top: 3.5rem; display: flex; gap: 1.6rem; border-bottom: 1px solid var(--faint); overflow-x: auto; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { font: inherit; color: var(--muted); background: none; border: 0; padding: 0 0 .7rem; cursor: pointer; position: relative; white-space: nowrap; }
+.tab:hover { color: var(--fg); }
+.tab[aria-selected="true"] { color: var(--fg); }
+.tab[aria-selected="true"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--fg); border-radius: 2px; }
+.panel { padding-top: 1.75rem; }
+.panel[hidden] { display: none; }
+.panel .oneline { color: var(--fg); max-width: 40rem; }
+.panel .media { margin-top: 1.5rem; }
+.panel > .sec:first-of-type { margin-top: 2.5rem; }
+
+/* one line of work under each company */
+.rows .row .what { display: block; margin-left: calc(16px + 0.55rem); color: var(--muted); font-size: 15px; line-height: 1.4; margin-top: .1rem; }
+.rows li + li { margin-top: 0.9rem; }
+@media (max-width: 640px) { .rows .row .yr { margin-left: calc(16px + 0.55rem); font-size: 15px; } }
