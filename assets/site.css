@@ -165,3 +165,8 @@ a:hover { color: var(--accent); }
 .storylink .play::before { content: "▶ "; }
 .storylink:hover .play { background: var(--accent); }
 .case .note { margin-top: .6rem; font-size: 15px; }
+.ss-track .slide { background: #fff; }
+.ss-track .slide img { object-fit: contain; }
+.ss-track .slide:first-child img { object-fit: cover; }
+.ss-track .slide { position: relative; }
+.ss-track .slide img { position: absolute; inset: 0; }
