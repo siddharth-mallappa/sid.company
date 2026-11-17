@@ -10,6 +10,8 @@
     var items = Array.prototype.slice.call(track.querySelectorAll('.gal-item'));
     var n = items.length;
     var count = gal.querySelector('.gal-count');
+    var dots = Array.prototype.slice.call(gal.querySelectorAll('.gal-dot'));
+    dots.forEach(function (d, i) { d.addEventListener('click', function () { goStrip(i); }); });
     var prevB = gal.querySelector('.gal-prev'), nextB = gal.querySelector('.gal-next');
 
     /* ---------- strip ---------- */
@@ -20,19 +22,25 @@
       if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 4) best = n - 1;
       return best;
     }
+    var want = null, wantT = 0;
     function goStrip(i) {
       i = Math.max(0, Math.min(n - 1, i));
+      want = i; wantT = Date.now();
       var it = items[i];
       track.scrollTo({ left: it.offsetLeft - (track.clientWidth - it.offsetWidth) / 2, behavior: behavior });
+      sync();
     }
+    function shown() { return (want !== null && Date.now() - wantT < 1200) ? want : current(); }
     function sync() {
-      var i = current();
+      var i = (want !== null && Date.now() - wantT < 1200) ? want : current();
       if (count) count.textContent = (i + 1) + ' / ' + n;
-      if (prevB) prevB.disabled = track.scrollLeft < 4;
-      if (nextB) nextB.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+      dots.forEach(function (d, k) { d.classList.toggle('on', k === i); if (k === i) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current'); });
+      if (prevB) prevB.disabled = i === 0;
+      if (nextB) nextB.disabled = i === n - 1;
     }
-    if (prevB) prevB.addEventListener('click', function () { goStrip(current() - 1); });
-    if (nextB) nextB.addEventListener('click', function () { goStrip(current() + 1); });
+    if (prevB) prevB.addEventListener('click', function () { goStrip(shown() - 1); });
+    if (nextB) nextB.addEventListener('click', function () { goStrip(shown() + 1); });
+    ['wheel', 'touchstart', 'pointerdown'].forEach(function (ev) { track.addEventListener(ev, function () { want = null; }, { passive: true }); });
     track.addEventListener('scroll', function () { clearTimeout(track._t); track._t = setTimeout(sync, 50); }, { passive: true });
     track.addEventListener('keydown', function (e) {
       if (e.key === 'ArrowRight') { e.preventDefault(); goStrip(current() + 1); }

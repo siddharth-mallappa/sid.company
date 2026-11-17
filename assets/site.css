@@ -177,12 +177,11 @@ a:hover { color: var(--accent); }
 .gal-item:hover img { transform: scale(1.02); }
 .gal-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .gal-bar { display: flex; justify-content: space-between; align-items: center; margin-top: 0.7rem; padding-right: clamp(1.25rem, 6vw, 4rem); font-family: var(--mono); font-size: 13px; color: var(--muted); }
-.gal-bar .hint { opacity: .8; }
 .gal-bar button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: .25rem 0; }
 .gal-bar button:hover:not(:disabled) { color: var(--fg); }
 .gal-bar button:disabled { opacity: .35; cursor: default; }
 .gal-bar .btns { display: flex; gap: 1.25rem; }
-@media (max-width: 640px) { .gal { --gh: 62vw; } .gal-bar .hint { display: none; } }
+@media (max-width: 640px) { .gal { --gh: 62vw; } }
 @media (hover: none) { .gal-item:hover img { transform: none; } }
 
 /* ---------- Gallery: full-screen viewer ---------- */
@@ -208,3 +207,17 @@ dialog.lb::backdrop { background: transparent; }
 .lb-slide img { max-width: 100%; max-height: calc(100dvh - 128px); width: auto; height: auto; object-fit: contain; border-radius: 6px; user-select: none; -webkit-user-drag: none; }
 @media (max-width: 640px) { .lb-top kbd { display: none; } .lb-slide { padding: 0; } .lb-slide img { border-radius: 0; } }
 @media (prefers-reduced-motion: reduce) { dialog.lb[open] { animation: none; } .gal-item img { transition: none; } }
+
+/* gallery: dots and the expand affordance */
+.gal-dots { display: flex; gap: 6px; align-items: center; }
+.gal-dot { width: 6px; height: 6px; padding: 0 !important; border-radius: 99px; background: var(--muted) !important; opacity: .35; transition: width .3s ease, opacity .3s ease; }
+.gal-dot.on { width: 18px; opacity: 1; background: var(--fg) !important; }
+.gal-dot:hover { opacity: .7; }
+.gal-bar .btns button { font-size: 15px; padding: .2rem .25rem; }
+.gal-zoom {
+  position: absolute; top: 10px; right: 10px; width: 28px; height: 28px; border-radius: 8px;
+  background: rgba(0,0,0,.55) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7'/%3E%3C/svg%3E") center / 14px no-repeat;
+  backdrop-filter: blur(6px); opacity: 0; transform: scale(.9); transition: opacity .2s ease, transform .2s ease;
+}
+.gal-item:hover .gal-zoom, .gal-item:focus-visible .gal-zoom { opacity: 1; transform: none; }
+@media (hover: none) { .gal-zoom { opacity: .85; transform: none; width: 24px; height: 24px; background-size: 12px; } }
