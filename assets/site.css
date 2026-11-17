@@ -1,7 +1,7 @@
 /* sid.company — quiet, single-size type; hierarchy through colour. Light and dark themes. */
 @font-face {
-  font-family: "MyHandwriting";
-  src: url("/fonts/MyHandwriting-VF.woff2") format("woff2-variations"), url("/fonts/MyHandwriting-VF.woff2") format("woff2");
+  font-family: "Sid's Handwriting";
+  src: url("/fonts/SidsHandwriting-VF.woff2") format("woff2-variations"), url("/fonts/SidsHandwriting-VF.woff2") format("woff2");
   font-weight: 300 800; font-style: normal; font-display: swap;
 }
 :root {
@@ -12,7 +12,7 @@
   --card: #ECECE9;
   --accent: #2648D8;
   --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Helvetica Neue", Arial, sans-serif;
-  --hand: "MyHandwriting", "Marker Felt", cursive;
+  --hand: "Sid's Handwriting", "Marker Felt", cursive;
   --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
   --col: 46rem;
   color-scheme: light;
