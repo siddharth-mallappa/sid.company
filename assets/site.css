@@ -136,3 +136,11 @@ a:hover { color: var(--accent); }
 .peek .frame .logos img { width: 34px; border-radius: 9px; }
 @media (max-width: 640px) { .rows .row { flex-direction: column; gap: 0; } }
 @media (prefers-reduced-motion: reduce) { .peek { transition: none; } }
+
+/* ---------- Case: natural-aspect cover and step list ---------- */
+.media img.shot { width: 100%; height: auto; border-radius: 10px; background: var(--card); }
+.case ol.steps { list-style: none; counter-reset: step; max-width: 40rem; }
+.case ol.steps li { counter-increment: step; display: grid; grid-template-columns: 2.25rem 1fr; column-gap: 0.25rem; color: var(--muted); }
+.case ol.steps li::before { content: counter(step, decimal-leading-zero); grid-row: span 2; font-family: var(--mono); font-size: 13px; padding-top: 0.25rem; color: var(--muted); }
+.case ol.steps li + li { margin-top: 1.1rem; }
+.case ol.steps .t { color: var(--fg); }
