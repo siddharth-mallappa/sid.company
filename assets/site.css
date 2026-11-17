@@ -1,4 +1,9 @@
 /* sid.company — quiet, single-size type; hierarchy through colour. Light and dark themes. */
+@font-face {
+  font-family: "MyHandwriting";
+  src: url("/fonts/MyHandwriting-VF.woff2") format("woff2-variations"), url("/fonts/MyHandwriting-VF.woff2") format("woff2");
+  font-weight: 300 800; font-style: normal; font-display: swap;
+}
 :root {
   --bg: #F6F6F4;
   --fg: #141414;
@@ -7,7 +12,7 @@
   --card: #ECECE9;
   --accent: #2648D8;
   --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Helvetica Neue", Arial, sans-serif;
-  --hand: "Rock Salt", "Marker Felt", cursive;
+  --hand: "MyHandwriting", "Marker Felt", cursive;
   --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
   --col: 46rem;
   color-scheme: light;
@@ -58,7 +63,7 @@ a:hover { color: var(--accent); }
 .lede p + p { margin-top: 1em; }
 .lede strong { color: var(--fg); font-weight: 400; }
 .sec { margin-top: 5.5rem; }
-.label { font-family: var(--hand); font-weight: 400; font-size: 15px; line-height: 1; letter-spacing: 0.02em; margin-bottom: 1.6rem; }
+.label { font-family: var(--hand); font-weight: 500; font-size: 20px; line-height: 1; letter-spacing: 0; margin-bottom: 1.6rem; }
 
 /* experience list */
 .rows { list-style: none; }
