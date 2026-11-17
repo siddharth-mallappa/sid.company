@@ -222,29 +222,38 @@ dialog.lb::backdrop { background: transparent; }
 .gal-item:hover .gal-zoom, .gal-item:focus-visible .gal-zoom { opacity: 1; transform: none; }
 @media (hover: none) { .gal-zoom { opacity: .85; transform: none; width: 24px; height: 24px; background-size: 12px; } }
 
-/* ---------- EasyDocument: animated logo construction ---------- */
-.frame.ed { background: linear-gradient(125deg, #0E1224 0%, #0B3EE5 45%, #453ADD 75%, #0E1224 100%); background-size: 260% 260%; animation: ed-bg 14s ease-in-out infinite alternate; }
-.ed-anim { width: 100%; height: 100%; display: block; }
-.ed-anim .g { fill: none; stroke: rgba(255,255,255,.7); stroke-width: .8; vector-effect: non-scaling-stroke; }
-.ed-anim .gl, .ed-anim .gv { stroke-dasharray: 200; stroke-dashoffset: 200; animation: ed-draw 7s cubic-bezier(.6,0,.2,1) infinite; animation-delay: var(--d, 0s); }
-.ed-anim .gc { stroke-dasharray: 30; stroke-dashoffset: 30; animation: ed-circ 7s ease infinite; }
-.ed-anim .bar { fill: #fff; opacity: 0; animation: 7s cubic-bezier(.2,.8,.2,1) infinite; }
-.ed-anim .b1 { animation-name: ed-b1; fill: #fff; }
-.ed-anim .b2 { animation-name: ed-b2; fill: #9DB2FF; }
-.ed-anim .b3 { animation-name: ed-b3; fill: #fff; }
-.ed-anim .wm { font: 500 10.5px "Inter", "Helvetica Neue", Arial, sans-serif; fill: #fff; letter-spacing: -.02em; opacity: 0; animation: ed-wm 7s ease infinite; }
-.ed-anim .wm tspan { fill: #9DB2FF; }
+/* ---------- EasyDocument: animated logo construction ----------
+   Built from the logo's real geometry: equal rows (x), equal curve steps (x), real anchors and handles.
+   One 9s cycle: grid → measurements → anchors & handles → outline traced along each path → fill → wordmark. */
+.frame.ed { background: linear-gradient(125deg, #0E1224 0%, #0B3EE5 48%, #453ADD 78%, #0E1224 100%); background-size: 260% 260%; animation: ed-bg 18s ease-in-out infinite alternate; }
+.ed-anim { width: 100%; height: 100%; display: block; --cyc: 9s; }
+.ed-anim * { animation-duration: var(--cyc); animation-iteration-count: infinite; animation-fill-mode: both; animation-delay: var(--d, 0s); }
+.ed-anim .g { fill: none; stroke: #fff; stroke-width: .7px; vector-effect: non-scaling-stroke; transform-box: fill-box; animation-name: ed-guide; animation-timing-function: cubic-bezier(.65,0,.35,1); }
+.ed-anim .g.h { transform-origin: 0 50%; --ax: scaleX(0); }
+.ed-anim .g.v { transform-origin: 50% 0; --ax: scaleY(0); }
+.ed-anim .g.s { stroke: #9DB2FF; stroke-dasharray: 3 3; }
+.ed-anim .dim { fill: none; stroke: #9DB2FF; stroke-width: .8px; vector-effect: non-scaling-stroke; animation-name: ed-dim; }
+.ed-anim .dl { font: 400 2.6px "JetBrains Mono", ui-monospace, monospace; fill: #9DB2FF; animation-name: ed-dim; }
+.ed-anim .hd { fill: none; stroke: #9DB2FF; stroke-width: .7px; vector-effect: non-scaling-stroke; animation-name: ed-handle; }
+.ed-anim .hp { fill: #0E1224; stroke: #9DB2FF; stroke-width: .7px; vector-effect: non-scaling-stroke; animation-name: ed-handle; }
+.ed-anim .an { fill: #0B3EE5; stroke: #fff; stroke-width: .8px; vector-effect: non-scaling-stroke; transform-box: fill-box; transform-origin: center; animation-name: ed-anchor; animation-timing-function: cubic-bezier(.3,1.6,.5,1); }
+.ed-anim .ol { fill: none; stroke: #fff; stroke-width: .3; stroke-linejoin: round; stroke-dasharray: 1 1; animation-name: ed-trace; animation-timing-function: cubic-bezier(.45,0,.2,1); }
+.ed-anim .fl { fill: #fff; animation-name: ed-fill; animation-timing-function: ease; }
+.ed-anim .fl.f2 { fill: #C9D5FF; }
+.ed-anim .wm { font: 500 10px "Inter", "Helvetica Neue", Arial, sans-serif; fill: #fff; letter-spacing: -.02em; animation-name: ed-wm; }
+.ed-anim .wm tspan { fill: #9DB2FF; animation: none; }
 @keyframes ed-bg { from { background-position: 0% 30%; } to { background-position: 100% 70%; } }
-@keyframes ed-draw { 0% { stroke-dashoffset: 200; opacity: 1; } 16% { stroke-dashoffset: 0; opacity: 1; } 50% { opacity: .9; } 62%, 86% { stroke-dashoffset: 0; opacity: .18; } 96%, 100% { stroke-dashoffset: 0; opacity: 0; } }
-@keyframes ed-circ { 0%, 10% { stroke-dashoffset: 30; opacity: 1; } 24% { stroke-dashoffset: 0; opacity: 1; } 50% { opacity: .8; } 62%, 86% { stroke-dashoffset: 0; opacity: 0; } 100% { opacity: 0; } }
-@keyframes ed-b1 { 0%, 22% { opacity: 0; transform: translateX(-14px); } 34%, 88% { opacity: 1; transform: none; } 97%, 100% { opacity: 0; transform: none; } }
-@keyframes ed-b2 { 0%, 28% { opacity: 0; transform: translateX(14px); } 40%, 88% { opacity: 1; transform: none; } 97%, 100% { opacity: 0; transform: none; } }
-@keyframes ed-b3 { 0%, 34% { opacity: 0; transform: translateX(-14px); } 46%, 88% { opacity: 1; transform: none; } 97%, 100% { opacity: 0; transform: none; } }
-@keyframes ed-wm { 0%, 46% { opacity: 0; transform: translateY(3px); } 56%, 88% { opacity: 1; transform: none; } 97%, 100% { opacity: 0; } }
-.ed-anim .wm { transform-box: fill-box; }
+@keyframes ed-guide { 0% { transform: var(--ax); opacity: .55; } 9% { transform: none; opacity: .55; } 44% { transform: none; opacity: .55; } 54%, 88% { transform: none; opacity: .13; } 96%, 100% { transform: none; opacity: 0; } }
+@keyframes ed-dim { 0% { opacity: 0; } 5%, 40% { opacity: .95; } 48%, 100% { opacity: 0; } }
+@keyframes ed-handle { 0% { opacity: 0; } 4%, 30% { opacity: .9; } 38%, 100% { opacity: 0; } }
+@keyframes ed-anchor { 0% { opacity: 0; transform: scale(0); } 3% { opacity: 1; transform: scale(1); } 30% { opacity: 1; transform: scale(1); } 37%, 100% { opacity: 0; transform: scale(.6); } }
+@keyframes ed-trace { 0% { stroke-dashoffset: 1; opacity: 0; } 0.5% { stroke-dashoffset: 1; opacity: 1; } 16% { stroke-dashoffset: 0; opacity: 1; } 27% { stroke-dashoffset: 0; opacity: 1; } 33%, 100% { stroke-dashoffset: 0; opacity: 0; } }
+@keyframes ed-fill { 0%, 44% { opacity: 0; } 51%, 89% { opacity: 1; } 97%, 100% { opacity: 0; } }
+@keyframes ed-wm { 0%, 53% { opacity: 0; } 60%, 89% { opacity: 1; } 97%, 100% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) {
-  .frame.ed, .ed-anim .g, .ed-anim .bar, .ed-anim .wm { animation: none !important; }
-  .ed-anim .bar, .ed-anim .wm { opacity: 1; } .ed-anim .g { opacity: .15; stroke-dashoffset: 0; }
+  .frame.ed, .ed-anim * { animation: none !important; }
+  .ed-anim .g { opacity: .13; transform: none; }
+  .ed-anim .dim, .ed-anim .dl, .ed-anim .hd, .ed-anim .hp, .ed-anim .an, .ed-anim .ol { opacity: 0; }
 }
 
 /* ---------- Project tabs ---------- */
