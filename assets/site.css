@@ -407,3 +407,8 @@ dialog.pdlg::backdrop { background: rgba(10,10,10,.45); -webkit-backdrop-filter:
 ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .35s; }
 .pbar .tabs { padding: 4px 14px 4px 2px; }
 .pbar .tabs .ind { inset: 0; }
+
+/* snippets (video loops and stills) */
+figure.snip { margin: 0; }
+figure.snip video, figure.snip img { display: block; width: 100%; height: auto; border-radius: 10px; background: #FBFAF6; }
+figure.snip figcaption { margin-top: .6rem; color: var(--muted); font-size: 15px; }

@@ -99,17 +99,29 @@
   });
 
   /* ---------- start ---------- */
+  var h = location.hash.slice(1), hi = secs.findIndex(function (s) { return s.id === h; });
+  lock = Date.now() + 800;
   var saved = null; try { saved = localStorage.getItem('view'); } catch (e) {}
   setMode(saved === 'visual' ? 'visual' : 'standard', true);
   bar.classList.add('ready');
-  var h = location.hash.slice(1), hi = secs.findIndex(function (s) { return s.id === h; });
   if (hi > -1) {
     setActive(hi);
-    if (mode() === 'visual') openCard(hi); else { lock = Date.now() + 600; secs[hi].scrollIntoView({ block: 'start' }); }
+    if (mode() === 'visual') openCard(hi);
+    else {
+      var jump = function () { lock = Date.now() + 700; window.scrollTo(0, secs[hi].getBoundingClientRect().top + window.scrollY - bar.offsetHeight - 16); };
+      jump(); addEventListener('load', function () { requestAnimationFrame(jump); }, { once: true });
+    }
   } else setActive(0);
   addEventListener('resize', function () {
     moveInd(tabsNav, tabs[current || 0]);
     moveInd(modeEl, modeEl.querySelector('[data-mode="' + mode() + '"]'));
   });
   if (document.fonts) document.fonts.ready.then(function () { dispatchEvent(new Event('resize')); });
+})();
+/* pause looping clips for reduced motion, and when off-screen */
+(function () {
+  var vids = document.querySelectorAll('video.loop'); if (!vids.length) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { vids.forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); v.controls = true; }); return; }
+  var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { var p = e.target.play(); if (p) p.catch(function () {}); } else e.target.pause(); }); });
+  vids.forEach(function (v) { v.muted = true; v.defaultMuted = true; io.observe(v); });
 })();
