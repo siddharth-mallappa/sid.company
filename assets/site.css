@@ -5,11 +5,11 @@
   font-weight: 300 800; font-style: normal; font-display: swap;
 }
 :root {
-  --bg: #F6F6F4;
-  --fg: #141414;
-  --muted: #74746F;
-  --faint: #DCDCD8;
-  --card: #ECECE9;
+  --bg: #F6EFBB;
+  --fg: #1C1A14;
+  --muted: #6B654C;
+  --faint: #E2D99E;
+  --card: #EFE6AA;
   --accent: #2648D8;
   --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Helvetica Neue", Arial, sans-serif;
   --hand: "Sid's Handwriting", "Marker Felt", cursive;
@@ -256,14 +256,18 @@ dialog.lb::backdrop { background: transparent; }
   .ed-anim .dim, .ed-anim .dl, .ed-anim .hd, .ed-anim .hp, .ed-anim .an, .ed-anim .ol { opacity: 0; }
 }
 
-/* ---------- Project tabs ---------- */
-.tabs { margin-top: 3.5rem; display: flex; gap: 1.6rem; border-bottom: 1px solid var(--faint); overflow-x: auto; scrollbar-width: none; }
+/* ---------- Project header + tabs ---------- */
+.ptop { align-items: flex-start; }
+.pname .crumb { color: var(--muted); font-size: 15px; }
+.pname .crumb::before { content: "← "; }
+.pname .crumb:hover { color: var(--fg); }
+.pname h1 { font-size: clamp(1.6rem, 3.4vw, 2rem); font-weight: 500; line-height: 1.2; letter-spacing: -0.015em; margin-top: .35rem; }
+.tabs { margin-top: 1.4rem; display: flex; gap: clamp(1.25rem, 3vw, 2.25rem); overflow-x: auto; scrollbar-width: none; padding-bottom: 4px; }
 .tabs::-webkit-scrollbar { display: none; }
-.tab { font: inherit; color: var(--muted); background: none; border: 0; padding: 0 0 .7rem; cursor: pointer; position: relative; white-space: nowrap; }
+.tab { font: inherit; font-size: 17px; color: var(--muted); background: none; border: 0; padding: 0; cursor: pointer; white-space: nowrap; text-decoration: none; text-underline-offset: .3em; text-decoration-thickness: 1px; }
 .tab:hover { color: var(--fg); }
-.tab[aria-selected="true"] { color: var(--fg); }
-.tab[aria-selected="true"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--fg); border-radius: 2px; }
-.panel { padding-top: 1.75rem; }
+.tab[aria-selected="true"] { color: var(--fg); text-decoration: underline; }
+.case .tabs + .panel, .case .panel { padding-top: 3.5rem; }
 .panel[hidden] { display: none; }
 .panel .oneline { color: var(--fg); max-width: 40rem; }
 .panel .media { margin-top: 1.5rem; }
@@ -273,3 +277,6 @@ dialog.lb::backdrop { background: transparent; }
 .rows .row .what { display: block; margin-left: calc(16px + 0.55rem); color: var(--muted); font-size: 15px; line-height: 1.4; margin-top: .1rem; }
 .rows li + li { margin-top: 0.9rem; }
 @media (max-width: 640px) { .rows .row .yr { margin-left: calc(16px + 0.55rem); font-size: 15px; } }
+
+/* about block at the end of tabbed project pages */
+.case .about .case-meta { margin-top: 1rem; color: var(--muted); }
