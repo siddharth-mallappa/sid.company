@@ -280,3 +280,35 @@ dialog.lb::backdrop { background: transparent; }
 
 /* about block at the end of tabbed project pages */
 .case .about .case-meta { margin-top: 1rem; color: var(--muted); }
+
+/* ---------- Press card ---------- */
+.press {
+  position: relative; overflow: hidden; border-radius: 10px; aspect-ratio: 16 / 9; color: #F2F2F5;
+  background: radial-gradient(90% 120% at 100% 0%, #3B3B57 0%, rgba(59,59,87,0) 60%), radial-gradient(70% 90% at 0% 100%, #2A2440 0%, rgba(42,36,64,0) 60%), #1F1F28;
+  padding: clamp(18px, 4.5%, 40px); display: grid; grid-template-rows: auto 1fr auto auto; gap: 0;
+}
+.press-top { display: flex; align-items: center; gap: .7rem; font-family: var(--mono); font-size: clamp(10px, 1.6cqi, 13px); color: #A9A9BA; container-type: normal; }
+.press { container-type: inline-size; }
+.press-top img { width: clamp(22px, 4.2cqi, 34px); height: auto; border-radius: 6px; }
+.press-top .d { margin-left: auto; }
+.press-h { align-self: center; font-size: clamp(20px, 5.6cqi, 46px); line-height: 1.08; font-weight: 500; letter-spacing: -0.025em; max-width: 17ch; margin: 0; }
+.press-sub { color: #A9A9BA; font-size: clamp(12px, 2cqi, 16px); margin: 0 0 clamp(8px, 2cqi, 16px); }
+.press-count { display: flex; align-items: baseline; gap: .6rem; border-top: 1px solid rgba(255,255,255,.12); padding-top: clamp(8px, 2cqi, 14px); }
+.press-count b { font-size: clamp(22px, 5cqi, 40px); font-weight: 500; letter-spacing: -0.02em; }
+.press-count span { color: #A9A9BA; font-size: clamp(12px, 2cqi, 15px); }
+.ticker { overflow: hidden; margin-top: clamp(6px, 1.4cqi, 10px); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.tk { display: flex; width: max-content; animation: tk 38s linear infinite; }
+.tk span { font-family: var(--mono); font-size: clamp(10px, 1.6cqi, 13px); color: #D6D6E2; white-space: nowrap; padding-right: 2.2em; }
+.tk span::before { content: "↗ "; color: #7C7C95; }
+@keyframes tk { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .tk { animation: none; flex-wrap: wrap; width: auto; } }
+.case ul.outlets li { display: flex; justify-content: space-between; gap: 1.5rem; }
+.case ul.outlets li::before { content: none; }
+.case ul.outlets li + li { margin-top: .5rem; }
+.case ul.outlets li a { color: var(--fg); }
+.case ul.outlets li span { white-space: nowrap; font-variant-numeric: tabular-nums; }
+@media (max-width: 640px) { .case ul.outlets li { flex-direction: column; gap: 0; } .case ul.outlets li + li { margin-top: .8rem; } }
+.case .press p { max-width: none; }
+.case .press .press-h { color: #F4F4F7; max-width: 17ch; }
+.case .press .press-sub { color: #A9A9BA; }
+@media (max-width: 640px) { .press { aspect-ratio: auto; min-height: 0; } .case .press .press-h { margin: 1.4rem 0 .9rem; } }
