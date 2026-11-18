@@ -312,3 +312,14 @@ dialog.lb::backdrop { background: transparent; }
 .case .press .press-h { color: #F4F4F7; max-width: 17ch; }
 .case .press .press-sub { color: #A9A9BA; }
 @media (max-width: 640px) { .press { aspect-ratio: auto; min-height: 0; } .case .press .press-h { margin: 1.4rem 0 .9rem; } }
+
+/* ---------- PR thumbnail with outlet ticker ---------- */
+.pr-thumb { margin: 0; border-radius: 10px; overflow: hidden; background: #0E1430; }
+.pr-thumb img { width: 100%; height: auto; display: block; }
+.pr-thumb .ticker { margin: 0; padding: 12px 0; background: #0B1028; border-top: 1px solid rgba(255,255,255,.08); mask-image: none; }
+.pr-thumb .tk { animation-duration: 45s; }
+.pr-thumb .tk a { font-family: var(--mono); font-size: 13px; color: #D6D9EA; white-space: nowrap; padding-right: 2.4em; text-decoration: none; }
+.pr-thumb .tk a::before { content: "↗ "; color: #6E7598; }
+.pr-thumb .tk a:hover { color: #fff; }
+.pr-thumb .tk .dup { display: contents; }
+.pr-thumb .ticker:hover .tk, .pr-thumb .ticker:focus-within .tk { animation-play-state: paused; }
