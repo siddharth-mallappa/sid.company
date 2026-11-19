@@ -594,7 +594,7 @@ body:has(.dismiss:hover) .dismiss { width: 48px; }
 
 .card {
   left: 40px; border-radius: 0;
-  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  background: color-mix(in srgb, var(--bg) 96%, transparent);
   -webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px);
   box-shadow: 0 8px 40px rgba(0,0,0,.12);
   transition: transform .6s cubic-bezier(.32,.72,0,1), opacity .3s ease, left .2s ease, box-shadow .2s ease;
@@ -628,13 +628,14 @@ body:has(.dismiss:hover) .card { left: 48px; box-shadow: 0 12px 52px rgba(0,0,0,
 :root[data-theme="dark"] { --hand-red: #FF5A45; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --hand-red: #FF5A45; } }
 .label { display: inline-block; font-weight: 800; color: var(--hand-red); font-size: 22px;
-  font-variation-settings: "WOBL" 0; transform-origin: 30% 60%; cursor: default; }
-.label:hover { animation: squiggle .6s steps(1, end) infinite; }
-@keyframes squiggle {
-  0%   { font-variation-settings: "WOBL" 70;  transform: rotate(-1.2deg) translateY(-1px); }
-  20%  { font-variation-settings: "WOBL" 20;  transform: rotate(.8deg)  translateY(0); }
-  40%  { font-variation-settings: "WOBL" 100; transform: rotate(-.4deg) translateY(1px); }
-  60%  { font-variation-settings: "WOBL" 40;  transform: rotate(1.2deg) translateY(-1px); }
-  80%  { font-variation-settings: "WOBL" 85;  transform: rotate(-.8deg) translateY(0); }
+  font-variation-settings: "WOBL" 0; cursor: default; }
+.label .w { display: inline-block; white-space: nowrap; }
+.label .ch { display: inline-block; transform-origin: 50% 70%; }
+.label:hover .ch { animation: scribble 1.8s ease-in-out infinite alternate; animation-delay: calc(var(--i) * -0.37s); }
+@keyframes scribble {
+  0%   { transform: rotate(-2deg) translateY(.4px);  font-variation-settings: "WOBL" 10; }
+  33%  { transform: rotate(1.5deg) translateY(-.5px); font-variation-settings: "WOBL" 35; }
+  66%  { transform: rotate(-1deg) translateY(.3px);  font-variation-settings: "WOBL" 20; }
+  100% { transform: rotate(2deg) translateY(-.3px);  font-variation-settings: "WOBL" 40; }
 }
-@media (prefers-reduced-motion: reduce) { .label:hover { animation: none; font-variation-settings: "WOBL" 60; } }
+@media (prefers-reduced-motion: reduce) { .label:hover .ch { animation: none; } }
