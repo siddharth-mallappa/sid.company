@@ -622,3 +622,19 @@ body:has(.dismiss:hover) .card { left: 48px; box-shadow: 0 12px 52px rgba(0,0,0,
   .side .grab { border-radius: 0; }
 }
 @media (prefers-reduced-motion: reduce) { .card > *, .card.enter > *, .card.leaving > * { transition: none !important; filter: none !important; } }
+
+/* ---------- handwritten titles: thick red, squiggle on hover ---------- */
+:root { --hand-red: #D62A1E; }
+:root[data-theme="dark"] { --hand-red: #FF5A45; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --hand-red: #FF5A45; } }
+.label { display: inline-block; font-weight: 800; color: var(--hand-red); font-size: 22px;
+  font-variation-settings: "WOBL" 0; transform-origin: 30% 60%; cursor: default; }
+.label:hover { animation: squiggle .6s steps(1, end) infinite; }
+@keyframes squiggle {
+  0%   { font-variation-settings: "WOBL" 70;  transform: rotate(-1.2deg) translateY(-1px); }
+  20%  { font-variation-settings: "WOBL" 20;  transform: rotate(.8deg)  translateY(0); }
+  40%  { font-variation-settings: "WOBL" 100; transform: rotate(-.4deg) translateY(1px); }
+  60%  { font-variation-settings: "WOBL" 40;  transform: rotate(1.2deg) translateY(-1px); }
+  80%  { font-variation-settings: "WOBL" 85;  transform: rotate(-.8deg) translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) { .label:hover { animation: none; font-variation-settings: "WOBL" 60; } }
