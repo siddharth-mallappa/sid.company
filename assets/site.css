@@ -463,3 +463,20 @@ button.sp-item { cursor: zoom-in; }
 @media (max-width: 640px) { .sp-item img { top: 4%; height: 92%; } }
 @media (max-width: 640px) { .sp-stage { aspect-ratio: 16 / 10; } .sp-item img { top: 3.5%; height: 93%; } }
 .pthumb video.fill { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+/* player: click right = next, left = back */
+.sp-stage { cursor: pointer; }
+.sp-stage[data-side="next"] { cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Ccircle cx='20' cy='20' r='19' fill='white' fill-opacity='.92'/%3E%3Cpath d='M15 20h10m-4-5 5 5-5 5' fill='none' stroke='%23111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") 20 20, e-resize; }
+.sp-stage[data-side="prev"] { cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Ccircle cx='20' cy='20' r='19' fill='white' fill-opacity='.92'/%3E%3Cpath d='M25 20H15m4-5-5 5 5 5' fill='none' stroke='%23111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") 20 20, w-resize; }
+button.sp-item { cursor: inherit; }
+.sp-item { pointer-events: none !important; }
+.sp-expand { position: absolute; top: 10px; right: 10px; z-index: 3; width: 32px; height: 32px; border: 0; border-radius: 9px; cursor: zoom-in;
+  background: rgba(0,0,0,.5) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7'/%3E%3C/svg%3E") center / 14px no-repeat;
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); opacity: .75; transition: opacity .2s; }
+.sp-expand:hover { opacity: 1; }
+.pm-piece + .pm-piece { margin-top: 3.5rem; }
+.pm-piece h3 { font-size: inherit; font-weight: 500; margin-bottom: .25rem; }
+.pm-piece > p { color: var(--muted); max-width: 40rem; }
+.pm-piece .media { margin-top: 1rem; }
+.sp-stage { background: radial-gradient(70% 90% at 50% -10%, var(--glow, #58208C) 0%, transparent 70%), #0E0A18; }
+figure.stage-v.ol { background: radial-gradient(70% 90% at 50% 0%, #7A3A08 0%, transparent 70%), #120A04; }

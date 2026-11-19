@@ -63,8 +63,18 @@
       paused = true; clearTimeout(timer); if (vid) vid.pause();
       show(slides.indexOf(it)); dlg.showModal(); document.documentElement.classList.add('lb-open');
     }
-    function closeLb() { dlg.close(); document.documentElement.classList.remove('lb-open'); paused = reduce; go(items.indexOf(slides[li])); }
-    slides.forEach(function (it) { it.addEventListener('click', function () { openLb(it); }); });
+    function closeLb() { dlg.close(); document.documentElement.classList.remove('lb-open'); paused = reduce; go(items.indexOf(slides[li])); pl.focus({ preventScroll: true }); }
+    /* click the right side to go forward, the left side to go back */
+    var stage = pl.querySelector('.sp-stage');
+    stage.addEventListener('mousemove', function (e) { var r = stage.getBoundingClientRect(); stage.dataset.side = (e.clientX - r.left) < r.width * 0.35 ? 'prev' : 'next'; });
+    stage.addEventListener('mouseleave', function () { delete stage.dataset.side; });
+    stage.addEventListener('click', function (e) {
+      if (e.target.closest('.sp-expand')) return;
+      var r = stage.getBoundingClientRect();
+      go(cur + ((e.clientX - r.left) < r.width * 0.35 ? -1 : 1), true);
+    });
+    var ex = pl.querySelector('.sp-expand');
+    if (ex) ex.addEventListener('click', function () { var it = items[cur]; openLb(slides.indexOf(it) > -1 ? it : slides[0]); });
     dlg.querySelector('.lb-close').addEventListener('click', closeLb);
     dlg.querySelector('.lb-prev').addEventListener('click', function () { show(li - 1); });
     dlg.querySelector('.lb-next').addEventListener('click', function () { show(li + 1); });
