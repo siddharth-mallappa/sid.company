@@ -44,13 +44,11 @@
 </main>
 <footer class="foot"><span>© 2026 Siddharth Mallappa</span><a href="mailto:siddharth07sid@gmail.com">siddharth07sid@gmail.com</a></footer>
 </div>
-<script>
-(function(){var b=document.querySelector('.theme'),r=document.documentElement;
-function cur(){return r.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}
-function label(){var n=cur()==='dark'?'light':'dark';b.textContent=n==='dark'?'Dark':'Light';b.setAttribute('aria-label','Switch to '+n+' theme')}
-b.addEventListener('click',function(){var n=cur()==='dark'?'light':'dark';r.dataset.theme=n;try{localStorage.setItem('theme',n)}catch(e){}label()});label();})();
-</script>
+<script src="/assets/project.js" defer></script>
+<script src="/assets/gallery.js" defer></script>
+<script src="/assets/player.js" defer></script>
 <script src="/assets/peek.js" defer></script>
+<script src="/assets/app.js" defer></script>
 <script src="/assets/favicon.js" defer></script>
 </body>
 </html>

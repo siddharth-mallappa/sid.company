@@ -2,28 +2,16 @@
    - Section list follows your scroll; clicking a section glides to it.
    - Back: the strip beside the card, Esc, or (on phones) swiping the sheet down.
    - Standard / Visual view toggle (pages with sections only). */
-(function () {
-  var card = document.querySelector('.card');
-  if (!card) return;
+window.initProject = function (card, startHash) {
+  if (!card || card.dataset.ready) return; card.dataset.ready = '1';
   var root = document.documentElement;
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var mqMobile = matchMedia('(max-width: 760px)');
   var bar = card.querySelector('.pbar');
   var nav = bar.querySelector('.tabs');
   var tabs = [].slice.call(nav.querySelectorAll('.tab'));
-  var secs = tabs.map(function (t) { return document.getElementById(t.dataset.id); });
+  var secs = tabs.map(function (t) { return card.querySelector('#' + CSS.escape(t.dataset.id)); });
   var modeEl = bar.querySelector('.mode');
-  var behind = document.querySelector('.behind');
-  var startHash = location.hash.slice(1);
-
-  /* keep the faded homepage at the spot you left it */
-  try { var hy = +sessionStorage.getItem('homeY') || 0; if (behind) behind.firstElementChild.style.transform = 'translateY(' + (-hy) + 'px)'; } catch (e) {}
-
-  /* ---------- going back ---------- */
-  function cameFromHome() { try { var r = new URL(document.referrer); return r.origin === location.origin && (r.pathname === '/' || r.pathname === '/index.html'); } catch (e) { return false; } }
-  function goBack() { if (cameFromHome() && history.length > 1) history.back(); else location.href = '/'; }
-  document.querySelector('.dismiss').addEventListener('click', function (e) { e.preventDefault(); goBack(); });
-  addEventListener('keydown', function (e) { if (e.key === 'Escape' && !document.querySelector('dialog[open]')) goBack(); });
 
   /* ---------- phones: swipe the sheet down to close ---------- */
   var sy = null, dy = 0;
@@ -34,7 +22,7 @@
   }, { passive: true });
   card.addEventListener('touchend', function () {
     if (sy === null) return; sy = null; card.style.transition = 'transform .32s cubic-bezier(.2,.8,.2,1)';
-    if (dy > 110) { card.style.transform = 'translateY(100%)'; setTimeout(goBack, 260); }
+    if (dy > 110) { card.style.transform = 'translateY(100%)'; setTimeout(function () { window.sheetClose && window.sheetClose(); }, 200); }
     else card.style.transform = '';
   });
 
@@ -73,7 +61,7 @@
   });
 
   /* ---------- visual mode ---------- */
-  var dlg = document.querySelector('.pdlg'), moved = null, opener = null;
+  var dlg = card.querySelector('.pdlg'), moved = null, opener = null;
   function openCard(i) {
     if (!dlg) return;
     var body = secs[i].querySelector('.pbody');
@@ -88,7 +76,7 @@
     dlg.close(); if (moved) { moved.home.appendChild(moved.body); moved = null; }
     if (opener) opener.focus({ preventScroll: true });
   }
-  if (dlg) {
+  if (dlg && !dlg.dataset.ready) { dlg.dataset.ready = '1';
     secs.forEach(function (s, i) { var c = s.querySelector('.pcard'); if (c) c.addEventListener('click', function () { openCard(i); setActive(i); }); });
     dlg.querySelector('.pdlg-x').addEventListener('click', closeCard);
     dlg.addEventListener('cancel', function (e) { e.preventDefault(); closeCard(); });
@@ -110,7 +98,7 @@
   } else delete root.dataset.view;
 
   /* ---------- start ---------- */
-  var h = startHash, hi = secs.findIndex(function (s) { return s && s.id === h; });
+  var h = startHash || '', hi = secs.findIndex(function (s) { return s && s.id === h; });
   if (hi > -1) {
     setActive(hi); lock = Date.now() + 900;
     var jump = function () { card.scrollTo(0, mode() === 'visual' ? 0 : yOf(secs[hi])); };
@@ -118,12 +106,11 @@
   } else setActive(0);
   ready = true;
   card.setAttribute('tabindex', '-1'); card.focus({ preventScroll: true });
-})();
-
-/* pause looping clips for reduced motion, and when off-screen */
-(function () {
-  var vids = document.querySelectorAll('video.loop'); if (!vids.length) return;
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { vids.forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); v.controls = true; }); return; }
-  var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { var p = e.target.play(); if (p) p.catch(function () {}); } else e.target.pause(); }); });
-  vids.forEach(function (v) { v.muted = true; v.defaultMuted = true; io.observe(v); });
-})();
+  /* looping clips: pause for reduced motion and when off-screen */
+  var vids = card.querySelectorAll('video.loop');
+  if (reduce) vids.forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); v.controls = true; });
+  else if (vids.length) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { var p = e.target.play(); if (p) p.catch(function () {}); } else e.target.pause(); }); });
+    vids.forEach(function (v) { v.muted = true; v.defaultMuted = true; io.observe(v); });
+  }
+};

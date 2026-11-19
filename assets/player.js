@@ -1,9 +1,11 @@
 /* Story player: the intro clip plays once, then the slides follow on a timer.
    Story-style progress bars; arrows, bars, swipe and arrow keys jump around; tap a slide to view it full screen. */
-(function () {
+window.initPlayer = function (root) {
+  root = root || document;
   var SLIDE_MS = 4500;
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  document.querySelectorAll('[data-player]').forEach(function (pl) {
+  root.querySelectorAll('[data-player]').forEach(function (pl) {
+    if (pl.dataset.ready) return; pl.dataset.ready = '1';
     var items = [].slice.call(pl.querySelectorAll('.sp-item'));
     var bars = [].slice.call(pl.querySelectorAll('.sp-prog i'));
     var vid = pl.querySelector('video');
@@ -50,7 +52,7 @@
     dlg.innerHTML = '<div class="lb-top"><span class="lb-count"></span><button class="lb-close x" type="button" aria-label="Close"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div>' +
       '<div class="sp-lb-img"><img alt=""></div>' +
       '<div class="lb-bottom"><button class="lb-prev" type="button" aria-label="Previous">←</button><p class="lb-cap"></p><button class="lb-next" type="button" aria-label="Next">→</button></div>';
-    document.body.appendChild(dlg);
+    (root === document ? document.body : root).appendChild(dlg);
     var limg = dlg.querySelector('img'), lc = dlg.querySelector('.lb-count'), lcap = dlg.querySelector('.lb-cap');
     var slides = items.filter(function (it) { return it.querySelector('img'); });
     var li = 0;
@@ -90,4 +92,5 @@
       else if (visible && vid && items[cur].contains(vid) && !paused) { var p = vid.play(); if (p) p.catch(function () {}); }
     }, { threshold: 0.35 }).observe(pl);
   });
-})();
+};
+initPlayer(document);

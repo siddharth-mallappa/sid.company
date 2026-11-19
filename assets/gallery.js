@@ -1,11 +1,13 @@
 /* Gallery: a swipeable filmstrip plus a full-screen viewer.
    Strip: native scroll-snap (swipe, trackpad, Prev/Next, arrow keys).
    Viewer: <dialog> — Esc or the back button closes it; swipe or arrow keys move; swipe down closes on touch. */
-(function () {
+window.initGallery = function (root) {
+  root = root || document;
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var behavior = reduce ? 'auto' : 'smooth';
 
-  document.querySelectorAll('[data-gal]').forEach(function (gal) {
+  root.querySelectorAll('[data-gal]').forEach(function (gal) {
+    if (gal.dataset.ready) return; gal.dataset.ready = '1';
     var track = gal.querySelector('.gal-track');
     var items = Array.prototype.slice.call(track.querySelectorAll('.gal-item'));
     var n = items.length;
@@ -57,7 +59,7 @@
       '<div class="lb-top"><span class="lb-count"></span><button class="lb-close x" type="button" aria-label="Close"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div>' +
       '<div class="lb-track"></div>' +
       '<div class="lb-bottom"><button class="lb-prev" type="button" aria-label="Previous image">←</button><p class="lb-cap"></p><button class="lb-next" type="button" aria-label="Next image">→</button></div>';
-    document.body.appendChild(dlg);
+    (root === document ? document.body : root).appendChild(dlg);
     var ltrack = dlg.querySelector('.lb-track'), lcount = dlg.querySelector('.lb-count'), lcap = dlg.querySelector('.lb-cap');
     items.forEach(function (it) {
       var img = it.querySelector('img');
@@ -134,4 +136,5 @@
       if (dy > 110) close();
     });
   });
-})();
+};
+initGallery(document);
