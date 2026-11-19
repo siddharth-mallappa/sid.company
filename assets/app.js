@@ -6,7 +6,7 @@
   var root = document.documentElement;
   var mqMobile = matchMedia('(max-width: 760px)');
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var OPEN_MS = reduce ? 0 : 560, CLOSE_MS = reduce ? 0 : 380;
+  var OPEN_MS = reduce ? 0 : 600, CLOSE_MS = reduce ? 0 : 330;
   var homeTitle = 'Siddharth Mallappa — Founding Marketeer, Designer, Technologist';
 
   /* ---------- theme switch (works for every .theme button) ---------- */

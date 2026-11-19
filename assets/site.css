@@ -582,3 +582,43 @@ html.sheet-in .dismiss { opacity: 1; }
 }
 @media (prefers-reduced-motion: reduce) { .card, .card.leaving, .shade { transition: none !important; } }
 html.sheet-open .peek { opacity: 0 !important; visibility: hidden; }
+
+/* ---------- v3: subtle back strip, soft glass card, sharp edges ---------- */
+.dismiss, body:has(.dismiss:hover) .dismiss { width: 40px; }
+body:has(.dismiss:hover) .dismiss { width: 48px; }
+.dismiss { transition: opacity .3s ease, width .2s ease;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='-64 -64 384 384'%3E%3Cpath fill='%231a1a1a' d='M232,144a64.07,64.07,0,0,1-64,64H80a8,8,0,0,1,0-16h88a48,48,0,0,0,0-96H51.31l34.35,34.34a8,8,0,0,1-11.32,11.32l-48-48a8,8,0,0,1,0-11.32l48-48A8,8,0,0,1,85.66,45.66L51.31,80H168A64.07,64.07,0,0,1,232,144Z'/%3E%3C/svg%3E") 16 16, w-resize; }
+:root[data-theme="dark"] .dismiss {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='-64 -64 384 384'%3E%3Cpath fill='%23eeeeee' d='M232,144a64.07,64.07,0,0,1-64,64H80a8,8,0,0,1,0-16h88a48,48,0,0,0,0-96H51.31l34.35,34.34a8,8,0,0,1-11.32,11.32l-48-48a8,8,0,0,1,0-11.32l48-48A8,8,0,0,1,85.66,45.66L51.31,80H168A64.07,64.07,0,0,1,232,144Z'/%3E%3C/svg%3E") 16 16, w-resize; }
+.dismiss-hint { display: none; }
+
+.card {
+  left: 40px; border-radius: 0;
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  -webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px);
+  box-shadow: 0 8px 40px rgba(0,0,0,.12);
+  transition: transform .6s cubic-bezier(.32,.72,0,1), opacity .3s ease, left .2s ease, box-shadow .2s ease;
+}
+:root[data-theme="dark"] .card { box-shadow: 0 8px 40px rgba(0,0,0,.4); }
+body:has(.dismiss:hover) .card { left: 48px; box-shadow: 0 12px 52px rgba(0,0,0,.18); }
+:root[data-theme="dark"] body:has(.dismiss:hover) .card { box-shadow: 0 12px 52px rgba(0,0,0,.5); }
+
+/* contents settle in softly while the card slides */
+.card > * { transition: opacity .35s ease .08s, filter .35s ease .08s; }
+.card.enter > * { opacity: 0; filter: blur(8px); transition: none; }
+.card.leaving { transition: transform .32s cubic-bezier(.4,0,1,1), left .2s; }
+.card.leaving > * { opacity: 0; filter: blur(6px); transition: opacity .18s ease, filter .18s ease; }
+
+/* no dimming over the homepage: the glass does the separation */
+.shade { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+:root[data-theme="dark"] .shade { background: rgba(0,0,0,.2); }
+
+/* active section: just darker text, no square marker */
+.card .pbar .tab[aria-current]::before { display: none; }
+
+@media (max-width: 760px) {
+  .dismiss, body:has(.dismiss:hover) .dismiss { width: auto; height: 48px; cursor: pointer; }
+  .card, body:has(.dismiss:hover) .card { left: 0; border-radius: 0; box-shadow: 0 -8px 40px rgba(0,0,0,.12); }
+  .side .grab { border-radius: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .card > *, .card.enter > *, .card.leaving > * { transition: none !important; filter: none !important; } }
