@@ -424,3 +424,11 @@ figure.snip figcaption { margin-top: .6rem; color: var(--muted); font-size: 15px
 .pbar .mode button svg, .pbar .mode button[aria-checked="true"] svg { transform: none; transition: none; }
 .pbar, .pbar.stuck { transition: none; padding-top: 10px; padding-bottom: 10px; }
 .pbar.stuck { box-shadow: 0 1px 0 var(--faint); }
+
+/* vertical clip on a wide stage */
+figure.stage-v { margin: 0; aspect-ratio: 16 / 10; border-radius: 10px; overflow: hidden; display: grid; place-items: center;
+  background: radial-gradient(60% 80% at 50% 0%, #4A1C7A 0%, rgba(74,28,122,0) 70%), radial-gradient(50% 60% at 50% 100%, #1B0B33 0%, rgba(27,11,51,0) 70%), #0E0A18; }
+figure.stage-v video { height: 88%; width: auto; aspect-ratio: 600 / 1000; border-radius: 14px; box-shadow: 0 30px 60px -20px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.08); background: #1A0D2E; }
+@media (max-width: 640px) { figure.stage-v { aspect-ratio: 4 / 5; } }
+figure.stage-v { position: relative; display: block; }
+figure.stage-v video { position: absolute; top: 6%; left: 50%; transform: translateX(-50%); height: 88%; width: auto; max-width: none; aspect-ratio: 600 / 1000; object-fit: cover; }
