@@ -412,3 +412,15 @@ dialog.pdlg::backdrop { background: rgba(10,10,10,.45); -webkit-backdrop-filter:
 figure.snip { margin: 0; }
 figure.snip video, figure.snip img { display: block; width: 100%; height: auto; border-radius: 10px; background: #FBFAF6; }
 figure.snip figcaption { margin-top: .6rem; color: var(--muted); font-size: 15px; }
+
+/* simple tabs: plain text, current one underlined; no animated pill */
+.pbar .ind { display: none; }
+.pbar .tabs { gap: clamp(1.25rem, 3vw, 2.25rem); padding: 4px 0; }
+.pbar .tab { padding: 4px 0; border-radius: 0; font-size: 16px; color: var(--muted); transition: none; }
+.pbar .tab[aria-current] { color: var(--fg); text-decoration: underline !important; text-underline-offset: .35em; text-decoration-thickness: 1px; }
+.pbar .mode { background: none; padding: 0; gap: 4px; }
+.pbar .mode button { width: 28px; height: 28px; transition: none; }
+.pbar .mode button[aria-checked="true"] { color: var(--fg); }
+.pbar .mode button svg, .pbar .mode button[aria-checked="true"] svg { transform: none; transition: none; }
+.pbar, .pbar.stuck { transition: none; padding-top: 10px; padding-bottom: 10px; }
+.pbar.stuck { box-shadow: 0 1px 0 var(--faint); }
