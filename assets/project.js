@@ -106,7 +106,7 @@
   bar.classList.add('ready');
   if (hi > -1) {
     setActive(hi);
-    if (mode() === 'visual') openCard(hi);
+    if (mode() === 'visual') { secs[hi].scrollIntoView({ block: 'center' }); }
     else {
       var jump = function () { lock = Date.now() + 700; window.scrollTo(0, secs[hi].getBoundingClientRect().top + window.scrollY - bar.offsetHeight - 16); };
       jump(); addEventListener('load', function () { requestAnimationFrame(jump); }, { once: true });

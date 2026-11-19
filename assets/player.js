@@ -47,7 +47,7 @@
 
     /* full-screen view of a slide */
     var dlg = document.createElement('dialog'); dlg.className = 'lb sp-lb'; dlg.setAttribute('aria-label', 'Slide viewer');
-    dlg.innerHTML = '<div class="lb-top"><span class="lb-count"></span><button class="lb-close" type="button">Close <kbd>esc</kbd></button></div>' +
+    dlg.innerHTML = '<div class="lb-top"><span class="lb-count"></span><button class="lb-close x" type="button" aria-label="Close"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div>' +
       '<div class="sp-lb-img"><img alt=""></div>' +
       '<div class="lb-bottom"><button class="lb-prev" type="button" aria-label="Previous">←</button><p class="lb-cap"></p><button class="lb-next" type="button" aria-label="Next">→</button></div>';
     document.body.appendChild(dlg);

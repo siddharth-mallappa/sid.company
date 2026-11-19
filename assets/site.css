@@ -480,3 +480,7 @@ button.sp-item { cursor: inherit; }
 .pm-piece .media { margin-top: 1rem; }
 .sp-stage { background: radial-gradient(70% 90% at 50% -10%, var(--glow, #58208C) 0%, transparent 70%), #0E0A18; }
 figure.stage-v.ol { background: radial-gradient(70% 90% at 50% 0%, #7A3A08 0%, transparent 70%), #120A04; }
+
+/* close: a plain × (Esc still closes) */
+button.x { display: grid; place-items: center; width: 34px; height: 34px; padding: 0; border-radius: 999px; opacity: .75; }
+button.x:hover { opacity: 1; background: color-mix(in srgb, currentColor 12%, transparent); }
