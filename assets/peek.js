@@ -30,3 +30,8 @@
     r.addEventListener('mouseleave', function () { peek.classList.remove('on'); });
   });
 })();
+/* remember where the homepage was scrolled, so the faded copy behind a project lines up */
+(function () {
+  if (location.pathname !== '/' && location.pathname !== '/index.html') return;
+  document.addEventListener('click', function (e) { var a = e.target.closest('a[href^="/work/"]'); if (a) { try { sessionStorage.setItem('homeY', String(scrollY)); } catch (er) {} } }, true);
+})();
