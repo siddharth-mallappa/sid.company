@@ -623,19 +623,9 @@ body:has(.dismiss:hover) .card { left: 48px; box-shadow: 0 12px 52px rgba(0,0,0,
 }
 @media (prefers-reduced-motion: reduce) { .card > *, .card.enter > *, .card.leaving > * { transition: none !important; filter: none !important; } }
 
-/* ---------- handwritten titles: thick red, squiggle on hover ---------- */
+/* ---------- handwritten titles: thick red ---------- */
 :root { --hand-red: #D62A1E; }
 :root[data-theme="dark"] { --hand-red: #FF5A45; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --hand-red: #FF5A45; } }
 .label { display: inline-block; font-weight: 800; color: var(--hand-red); font-size: 22px;
-  font-variation-settings: "WOBL" 0; cursor: default; }
-.label .w { display: inline-block; white-space: nowrap; }
-.label .ch { display: inline-block; transform-origin: 50% 70%; }
-.label:hover .ch { animation: scribble 1.8s ease-in-out infinite alternate; animation-delay: calc(var(--i) * -0.37s); }
-@keyframes scribble {
-  0%   { transform: rotate(-2deg) translateY(.4px);  font-variation-settings: "WOBL" 10; }
-  33%  { transform: rotate(1.5deg) translateY(-.5px); font-variation-settings: "WOBL" 35; }
-  66%  { transform: rotate(-1deg) translateY(.3px);  font-variation-settings: "WOBL" 20; }
-  100% { transform: rotate(2deg) translateY(-.3px);  font-variation-settings: "WOBL" 40; }
-}
-@media (prefers-reduced-motion: reduce) { .label:hover .ch { animation: none; } }
+  }
