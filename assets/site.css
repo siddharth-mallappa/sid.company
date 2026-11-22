@@ -673,3 +673,16 @@ body:has(.dismiss:hover) .card { left: 48px; box-shadow: 0 12px 52px rgba(0,0,0,
 .side-step { display: block; font-family: var(--hand); color: var(--hand-red); font-size: 18px; line-height: 1; margin-bottom: 10px; }
 .ruler.flip .rl-txt { text-align: right; }
 @media (max-width: 760px) { .ruler.flip .rl-txt { text-align: left; } .rl-cap { height: 104px; } }
+
+/* ruler caption v2: thumbnails, then name, description, "Done for" */
+.rl-cap { height: 150px; }
+.rl-card { flex-direction: column; gap: 8px; }
+.rl-card[href] .rl-name::after { content: none; }
+.rl-txt { width: auto; max-width: 380px; }
+.rl-tags { font-family: var(--sans); font-size: 13px; margin-top: 4px; }
+.ruler.flip .rl-card { align-items: flex-end; }
+@media (max-width: 760px) { .rl-cap { height: 160px; } .ruler.flip .rl-card { align-items: flex-start; } }
+
+/* inside the sliding cards: section titles in the handwriting, black, at body size */
+.card .label, .pdlg .label { color: var(--fg); font-size: 17px; font-weight: 600; }
+.side-step { color: var(--muted); font-size: 17px; font-weight: 500; }
