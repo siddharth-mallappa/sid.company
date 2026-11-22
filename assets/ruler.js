@@ -11,6 +11,12 @@
     var keys = []; parts.forEach(function (p) { if ((p.classList.contains('st') || p.classList.contains('rl-n')) && keys.indexOf(p.dataset.k) < 0) keys.push(p.dataset.k); });
     var anchor = {}; parts.forEach(function (p) { if (p.classList.contains('st') || p.classList.contains('rl-n')) anchor[p.dataset.k] = p; });
     var cur = null, centers = [];
+    var timer = null;
+    function cycle() {                                  // one big thumbnail that moves through the step's work
+      clearInterval(timer); var t = [].slice.call(thumbsEl.children), i = 0;
+      t.forEach(function (x, j) { x.classList.toggle('on', j === 0); });
+      if (t.length > 1) timer = setInterval(function () { t[i].classList.remove('on'); i = (i + 1) % t.length; t[i].classList.add('on'); }, 1500);
+    }
 
     function measure() { var r = row.getBoundingClientRect(); centers = parts.map(function (p) { var b = p.getBoundingClientRect(); return b.left + b.width / 2 - r.left; }); }
     function wave(x) {
@@ -23,10 +29,10 @@
     function show(k) {
       if (k === cur) return; cur = k;
       parts.forEach(function (p) { p.classList.toggle('on', !!k && anchor[k] === p); });
-      if (!k) { el.classList.remove('active'); return; }
+      if (!k) { el.classList.remove('active'); clearInterval(timer); return; }
       var d = data[k];
       nameEl.textContent = d.name; descEl.textContent = d.desc; tagsEl.textContent = d.tags || '';
-      thumbsEl.innerHTML = d.thumbs || '';
+      thumbsEl.innerHTML = d.thumbs || ''; cycle();
       if (d.href) { card.setAttribute('href', d.href); card.removeAttribute('aria-disabled'); }
       else { card.removeAttribute('href'); card.setAttribute('aria-disabled', 'true'); }
       el.classList.add('active'); el.classList.toggle('linked', !!d.href);

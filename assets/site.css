@@ -686,3 +686,16 @@ body:has(.dismiss:hover) .card { left: 48px; box-shadow: 0 12px 52px rgba(0,0,0,
 /* inside the sliding cards: section titles in the handwriting, black, at body size */
 .card .label, .pdlg .label { color: var(--fg); font-size: 17px; font-weight: 600; }
 .side-step { color: var(--muted); font-size: 17px; font-weight: 500; }
+
+/* ruler caption v3: one larger thumbnail that cycles, text below; floats over the page */
+.rl-cap { height: 12px; margin-top: 8px; z-index: 5; }
+.rl-card { padding: 10px; margin: -10px; background: var(--bg); width: max-content; }
+.rl-thumbs { position: relative; display: block; width: 208px; height: 130px; background: var(--card); overflow: hidden; }
+.rl-thumbs:empty { display: none; }
+.rl-th { position: absolute; inset: 0; width: auto; height: auto; opacity: 0; transition: opacity .5s ease; }
+.rl-th.on { opacity: 1; }
+.rl-th.logo img { width: 30px; height: 30px; }
+.rl-th.word { font-size: 13px; }
+@media (max-width: 760px) { .rl-cap { height: 12px; } .rl-thumbs { width: 176px; height: 110px; } }
+.rl-card { box-shadow: 0 10px 36px rgba(0,0,0,.10); }
+:root[data-theme="dark"] .rl-card { box-shadow: 0 10px 36px rgba(0,0,0,.5); }
