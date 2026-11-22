@@ -30,7 +30,7 @@
       .catch(function (e) { delete cache[path]; throw e; });
     return cache[path];
   }
-  function isWork(href) { try { var u = new URL(href, location.href); return u.origin === location.origin && /^\/work\/[^/]+\/?$/.test(u.pathname); } catch (e) { return false; } }
+  function isWork(href) { try { var u = new URL(href, location.href); return u.origin === location.origin && /^\/(work|craft)\/[^/]+\/?$/.test(u.pathname); } catch (e) { return false; } }
   function norm(p) { return p.replace(/\/?$/, '/'); }
 
   /* ---------- the homepage underneath ---------- */
@@ -54,6 +54,7 @@
     b.querySelectorAll('.theme-ghost').forEach(function (t) { t.className = 'theme'; t.removeAttribute('tabindex'); });
     document.body.classList.remove('pcard-page'); labelThemes();
     if (window.initPeek) window.initPeek();
+    if (window.initRuler) window.initRuler();
   }
 
   /* ---------- open / swap / close ---------- */
