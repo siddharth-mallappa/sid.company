@@ -5,7 +5,7 @@
   function init(el) {
     if (el.dataset.ready) return; el.dataset.ready = '1';
     var row = el.querySelector('.rl-row'), cap = el.querySelector('.rl-cap'), card = cap.querySelector('.rl-card');
-    var nameEl = cap.querySelector('.rl-name'), descEl = cap.querySelector('.rl-desc'), tagsEl = cap.querySelector('.rl-tags'), thumbsEl = cap.querySelector('.rl-thumbs');
+    var nameEl = el.querySelector('.rl-name'), snameEl = cap.querySelector('.rl-sname'), descEl = cap.querySelector('.rl-desc'), tagsEl = cap.querySelector('.rl-tags'), thumbsEl = cap.querySelector('.rl-thumbs');
     var data = {}; JSON.parse(el.querySelector('.rl-data').textContent).forEach(function (d) { data[d.k] = d; });
     var parts = [].slice.call(row.querySelectorAll('.rl-l, .rl-n'));
     var keys = []; parts.forEach(function (p) { if ((p.classList.contains('st') || p.classList.contains('rl-n')) && keys.indexOf(p.dataset.k) < 0) keys.push(p.dataset.k); });
@@ -31,7 +31,7 @@
       parts.forEach(function (p) { p.classList.toggle('on', !!k && anchor[k] === p); });
       if (!k) { el.classList.remove('active'); clearInterval(timer); return; }
       var d = data[k];
-      nameEl.textContent = d.name; descEl.textContent = d.desc; tagsEl.textContent = d.tags || '';
+      nameEl.textContent = d.name; snameEl.textContent = d.name; descEl.textContent = d.desc; tagsEl.textContent = d.tags || '';
       thumbsEl.innerHTML = d.thumbs || ''; cycle();
       if (d.href) { card.setAttribute('href', d.href); card.removeAttribute('aria-disabled'); }
       else { card.removeAttribute('href'); card.setAttribute('aria-disabled', 'true'); }
@@ -44,6 +44,8 @@
       var left = flip ? Math.max(0, x - w) : x;
       el.classList.toggle('flip', flip);
       card.style.transform = 'translateX(' + left + 'px)';
+      var nw = nameEl.offsetWidth, nl = flip ? Math.max(0, x - nw) : Math.min(x, Math.max(0, W - nw));
+      nameEl.style.transform = 'translateX(' + nl + 'px)';
     }
     function at(clientX) {
       var r = row.getBoundingClientRect(), x = clientX - r.left, best = 0;

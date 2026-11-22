@@ -716,3 +716,20 @@ body:has(.dismiss:hover) .card { left: 48px; box-shadow: 0 12px 52px rgba(0,0,0,
   .rl-cap { height: 92px; }
   .rl-thumbs { width: 200px; top: -173px; }
 }
+
+/* ruler v5: name above the line, thumbnail and text below; no red on hover */
+.ruler { margin-top: 2.6em; }
+.rl-above { position: absolute; left: 0; right: 0; top: -24px; height: 20px; pointer-events: none; }
+.rl-name { position: absolute; left: 0; top: 0; white-space: nowrap; color: var(--fg); font-size: 15px; line-height: 20px;
+  opacity: 0; transition: opacity .18s ease, transform .28s cubic-bezier(.2,.8,.2,1); }
+.ruler.active .rl-name { opacity: 1; }
+.rl-l.on::before { background: var(--fg); opacity: 1; height: 14px; width: 2px; }
+.rl-card[href]:hover .rl-name { text-decoration: none; }
+.rl-card[href]:hover .rl-desc { color: var(--fg); }
+.rl-cap { height: 214px; margin-top: 12px; }
+.rl-card { flex-direction: column; gap: 10px; }
+.rl-thumbs { position: relative; left: auto; right: auto; top: auto; width: 208px; opacity: 1; scale: 1; }
+.ruler.flip .rl-thumbs { left: auto; right: auto; }
+.rl-tags { font-family: var(--sans); font-size: 13px; color: var(--muted); }
+.ruler + * , .lede + .sec { margin-top: 2.5rem; }
+@media (max-width: 760px) { .rl-cap { height: 214px; } .rl-thumbs { width: 176px; top: auto; } }
